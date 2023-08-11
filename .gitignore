@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+megaphone
+PhoneBook
+
+# Test Files
+foo.*
+
+# Others
+.vscode
+Lab
