@@ -9,18 +9,21 @@
 */
 
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <locale>
 
 int main(int ac, char **av)
 {
     if (ac > 1){
-    std::locale loc; // object initialized with the default locale.
+        // object initialized with the default locale.
+        std::locale loc;
+        std::string str;
         int i = -1;
+
         av++;
         while (av[++i]){
-            std::string str=av[i];
-            for (std::string::size_type i=0; i<str.length(); ++i) //  typedef size_t size_type;
+            str = av[i];
+            for (std::string::size_type i = 0; i < str.length(); ++i) //  size_type = size_t;
                 std::cout << std::toupper(str[i], loc);
         }
         std::cout << "\n";
