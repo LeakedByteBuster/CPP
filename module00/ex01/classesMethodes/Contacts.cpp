@@ -36,7 +36,7 @@ void    Contacts::setNickname(std::string nickname){
 }
 
 void    Contacts::setPhoneNumber(std::string PhoneNumber){
-    this->PhoneNumber = nickname;
+    this->PhoneNumber = PhoneNumber;
 }
 
 void    Contacts::setDarkestSecrect(std::string DarkSecrect){

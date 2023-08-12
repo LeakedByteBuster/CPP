@@ -16,14 +16,14 @@ private :
                 LIST
         #undef LIST
 public :
-        //  *** Value Setters ***
+        //  *** Value Setter Methods ***
         void  setFname(std::string Fname);
         void  setLname(std::string Lname);
         void  setNickname(std::string nickname);
         void  setPhoneNumber(std::string PhoneNumber);
         void  setDarkestSecrect(std::string DarkSecrect);
 
-        //  *** Value Getters ***
+        //  *** Value Getter Methods ***
         std::string  getFname();
         std::string  getLname();
         std::string  getNickname();

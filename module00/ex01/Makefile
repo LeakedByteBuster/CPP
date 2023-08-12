@@ -12,6 +12,7 @@ DEPS_FLAGS = -MMD -MP
 SRC 	=	src/main.cpp \
 			src/utils.cpp \
 			classesMethodes/PhoneBook.cpp \
+			classesMethodes/utilsPhoneBook.cpp \
 			classesMethodes/Contacts.cpp
 
 OBJ_DIR = obj

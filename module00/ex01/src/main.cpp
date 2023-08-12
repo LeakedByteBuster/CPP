@@ -1,14 +1,12 @@
 #include "PhoneBook.hpp"
 #include "utils.hpp"
 
-
 /*
 *   TODO:   Change attributes to private / get, set functions
 *   TODO:   SEARCH + index
 *   TODO:   Header for Class Contact || Contact's Attributes ==> private
 *   TODO: Contacts    &PhoneBook::getContact(int i)? argument??????????
 */
-
 
 #ifdef DEBUG_PROG
 void    fill_data(PhoneBook &book){
