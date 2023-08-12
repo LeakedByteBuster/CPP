@@ -1,8 +1,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "PhoneBook.hpp"
-
 # define HBLK "\e[1;90m"
 # define HRED "\e[1;91m"
 # define HGRN "\e[1;92m"
@@ -13,18 +11,6 @@
 # define HWHT "\e[1;97m"
 # define RESET "\x1b[0m"
 
-class   Contacts;
-class   PhoneBook;
-
-# define LIST \
-    X(Fname) \
-    X(Lname) \
-    X(nickname) \
-    X(PhoneNumber) \
-    X(Dark_Secrect)
-
-void    add(Contacts &contact);
-void    search(PhoneBook &list);
-void    exit_program();
+void    welcome_message();
 
 #endif // UTILS_H

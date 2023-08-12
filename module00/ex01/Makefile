@@ -8,8 +8,11 @@ STD = -std=c++98
 
 DEPS_FLAGS = -MMD -MP
 
-SRC =	main.cpp \
-		PhoneBook.cpp
+
+SRC 	=	src/main.cpp \
+			src/utils.cpp \
+			classesMethodes/PhoneBook.cpp \
+			classesMethodes/Contacts.cpp
 
 OBJ_DIR = obj
 
@@ -40,14 +43,14 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-obj/%.o : %.cpp
-	@ mkdir -p obj
-	@ printf $(HWHT)"[* Compiling  "$(NC)
-	@ printf $(HGRN)"%s"$(NC) $(TMP)
-	$(eval TMP += $(EQ))
-	@ printf $(HGRN)">" $(NC)
-	@ printf "\r"$(NC)
-	@ $(CXX) $(STD) $(CXXFLAGS) $(DEPS_FLAGS) $(INC_HEADERS) -c $< -o $@
+$(OBJ_DIR)/%.o : %.cpp
+	@ mkdir -p $(dir $@)
+# @ printf $(HWHT)"[* Compiling  "$(NC)
+# @ printf $(HGRN)"%s"$(NC) $(TMP)
+# $(eval TMP += $(EQ))
+# @ printf $(HGRN)">" $(NC)
+# @ printf "\r"$(NC)
+	$(CXX) $(STD) $(CXXFLAGS) $(DEPS_FLAGS) $(INC_HEADERS) -c $< -o $@
 
 clean :
 	$(RM) $(OBJ_DIR)
@@ -59,6 +62,6 @@ re : fclean all
 
 .PHONY : re fclean clean all
 
-.SILENT : all clean fclean re $(NAME)
+# .SILENT : all clean fclean re $(NAME)
 
 -include $(DEPS)
