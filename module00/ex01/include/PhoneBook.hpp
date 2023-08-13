@@ -11,7 +11,7 @@ private :
 public :
         Contacts &getContact(int i);
         void     add(Contacts &contact);
-        void     search(PhoneBook &list);
+        void     search(PhoneBook &list, int printIndex);
 };
 
 // *    Read value from input and store it by using setter [functor]
@@ -20,9 +20,9 @@ void    read_input(void (Contacts::*func)(std::string), Contacts &contact, \
 
 void    print_line(int widthSize, bool pipe);
 
-void    print_table_titles(int padMax, int padMin, bool printAllData);
+void    print_table_titles(int padMax, int padMin);
 
-void    print_data(PhoneBook &list, int padMax, int padMin);
+void    print_data(PhoneBook &list, int padMax, int padMin, int allPhoneBook);
 
 #endif // PHONE_BOOK_HPP
 
