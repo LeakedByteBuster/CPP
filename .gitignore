@@ -39,6 +39,7 @@ ThisIsBrain
 
 # Test Files
 foo.*
+test.*
 
 # Others
 .vscode
