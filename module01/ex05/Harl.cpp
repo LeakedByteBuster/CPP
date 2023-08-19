@@ -20,20 +20,21 @@ void    Harl::info( void )
 
 void    Harl::warning( void )
 {
-    std::cout << HORG << "I think I deserve to have some extra bacon for free. I\'ve been "
+    std::cout << HMAG << "I think I deserve to have some extra bacon for free. I\'ve been "
         << "coming for years whereas you started working here since last month.\n" << RESET;
     return ;
 }
 
 void    Harl::error( void )
 {
-    std::cout << "This is unacceptable! I want to speak to the manager now.\n";
+    std::cout << HRED << "This is unacceptable! I want to speak to the manager now.\n"\
+        << RESET;
     return ;
 }
 
 void    Harl::messageNotFound( void )
 {
-    std::cout << "Probably complaining about\n";
+    std::cout << "Harl is thinking... about this complain...\n";
     return ;
 }
 
@@ -69,7 +70,7 @@ void    Harl::complain( std::string level )
             break;
 
         default:
-            std::cout << "Level: <" << level << ">: not found\n";
+            (this->*func[0])();
             break;
     }
 
