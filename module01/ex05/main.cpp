@@ -3,7 +3,17 @@
 
 int main()
 {
+    //  Instantiate a Harl object
+    Harl    msg;
 
-    std::cout << "hey\n";
+    /* Check Normal Cases */
+    msg.complain("debug");
+    msg.complain("info");
+    msg.complain("warning");
+    msg.complain("error");
+
+    /* Check Error Case */
+    msg.complain("Testerror");
+
     return (0);
 }
