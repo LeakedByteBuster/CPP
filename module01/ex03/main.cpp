@@ -4,7 +4,7 @@
 #include <iostream>
 
 /*
-*   TAKEAWAYS:
+*
 *       - Always prefer refrences over pointers
 *       - References must be initialized at declaration
 *           - member initializer list
@@ -13,21 +13,22 @@
 *
 *       - Use pointers when needed (Like case of jim below), because must explicitly \
 *           initialize the reference member 'weapon' at time of declation
+*
 */
 
 int main()
 {
-    //  *   both weapon variables cannot be passed by value 
+    //  *   both weapon variables cannot be passed by value
     {
         Weapon club = Weapon("crude spiked club");
-        HumanA bob("Bob", club); // Possibility of take as a refrence (member initializer list)
+        HumanA bob("Bob", club);
         bob.attack();
         club.setType("some other type of club");
         bob.attack();
     }
     {
         Weapon club = Weapon("crude spiked club");
-        HumanB jim("Jim"); // Cannot take it as a refrence
+        HumanB jim("Jim");
         jim.setWeapon(club);
         jim.attack();
         club.setType("some other type of club");

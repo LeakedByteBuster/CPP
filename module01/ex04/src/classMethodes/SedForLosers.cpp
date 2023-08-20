@@ -52,7 +52,6 @@ SedForLosers::SedForLosers(char *filename, char *oldStr, char *newStr)
     setOldStr(oldStr);
     setNewStr(newStr);
 
-    // getNewStr().empty()? replace with an empty string
     if (getFilename().empty() || getOldStr().empty())
     {	
         std::cerr << HRED << "Error: empty string\n" << RESET;

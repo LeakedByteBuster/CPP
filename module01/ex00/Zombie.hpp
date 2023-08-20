@@ -13,8 +13,10 @@ public :
 
     // Print "<name>: BraiiiiiiinnnzzzZ" in STDOUT
     void    announce( void );
+
     //  Returns name
     std::string getName() const;
+
     //  Set value of attribute name as the given name in function parameters
     void        setName(std::string name);
 

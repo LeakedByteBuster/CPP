@@ -6,7 +6,6 @@ Zombie* zombieHorde( int N, std::string name )
     Zombie  *zombieLand;
     try
     {
-        (void)name; 
         zombieLand = new Zombie[N];
         for (int i = 0; i < N; i++){
             zombieLand[i].setName(name);

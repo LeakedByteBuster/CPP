@@ -21,13 +21,14 @@ static void	openInputFile(SedForLosers &input, std::ifstream &ifs)
 	{
 		std::cerr << HRED << "Error: cannot open file " << filename \
 			<< RESET << "\n";
+		ifs.close();
 		exit(1);
 	}
 
 	return ;
 }
 
-void	openOutputFile(SedForLosers &input, std::ifstream &ifs, std::ofstream &ofs)
+static void	openOutputFile(SedForLosers &input, std::ifstream &ifs, std::ofstream &ofs)
 {
 	try {
 		if (ofs){
@@ -42,8 +43,10 @@ void	openOutputFile(SedForLosers &input, std::ifstream &ifs, std::ofstream &ofs)
 	}
 	catch (std::string filename)
 	{
-		std::cerr << HRED << "Error: cannot open file " << filename \
+		std::cerr << HRED << "Error: cannot open file: " << filename \
 			<< RESET << "\n";
+		ofs.close();
+		ifs.close();
 		exit(1);
 	}
 
@@ -53,7 +56,7 @@ void	openOutputFile(SedForLosers &input, std::ifstream &ifs, std::ofstream &ofs)
 int main(int ac, char **av)
 {
 	if (ac != 4){
-		std::cerr << HRED << "Error: incorrect number of arguments:\n ./sedForLosers" \
+		std::cerr << HRED << "Error: incorrect number of arguments:\n./sedForLosers" \
 			<< " <filename> <stringToBeReplaced> <string 2>\n" << RESET;
 		return (1);
 	}
@@ -61,11 +64,9 @@ int main(int ac, char **av)
 	SedForLosers   input(av[1], av[2], av[3]);
 
 	std::ifstream   ifs(input.getFilename());
-
 	openInputFile(input, ifs);
 
 	std::ofstream   ofs(input.getNewFilename());
-
 	openOutputFile(input, ifs, ofs);
 
     ofs.close();

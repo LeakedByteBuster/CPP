@@ -35,7 +35,7 @@ void        HumanA::attack()
 //  Constructor
 /*
 *   ':' ; Used to indicate the list of initializers
-*   Since weapon attribute is a refrence, we must initialize when the object is
+*   Initialize attributes when the object is
 *       created. The members will be initialized before HumanA's body is executed
 *   Syntax: ClassName::ClassName(parameters) : parameter1(value1), parameter(value2)...
 */

@@ -11,7 +11,6 @@ Zombie::Zombie(std::string name)
 
 Zombie::~Zombie()
 {
-    delete z;
     std::cout << HRED << "\t" << name << " has died 😔\n" << RESET;
     return ;
 }

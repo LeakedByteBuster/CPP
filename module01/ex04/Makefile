@@ -10,7 +10,6 @@ DEPS_FLAGS = -MMD -MP
 
 SRC =	src/main.cpp \
 		src/utils.cpp \
-		src/parsing/parsing.cpp \
 		src/classMethodes/SedForLosers.cpp
 		
 
