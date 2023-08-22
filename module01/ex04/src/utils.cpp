@@ -12,7 +12,7 @@ void    copyAndReplace(SedForLosers &input, std::ifstream &ifs, std::ofstream &o
     size_t  pos = 0;
     if (!str.empty()){
         while (true) {
-            pos = str.find(input.getOldStr());
+            pos = str.find(input.getOldStr(), input.getOldStr().length() + pos);
             if (pos == std::string::npos)
                 break ;
 
