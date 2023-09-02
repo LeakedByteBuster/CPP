@@ -2,15 +2,15 @@
 #include "Fixed.hpp"
 #include <cmath> 
 
-/* 
-*   Initialization of static member attribute
-*   This variable represent the number of bits of the 
-        fractionnal part, or simply the postion of the binary point 
-*/
+/* -------------------------------------------------------------------------- */
+/*                 Initialization of static member attribute                  */
+/* -------------------------------------------------------------------------- */
 
 const int Fixed::frac = 8;
 
-/************************ METHODS *******************************************/
+/* ------------------------------------------------------------------------- */
+/*                                  Methods                                  */
+/* ------------------------------------------------------------------------- */
 
 /* Returns the raw value of the fixed-point value */
 int Fixed::getRawBits( void ) const
@@ -46,7 +46,32 @@ int Fixed::toInt( void ) const
     return (getRawBits() >> frac);
 }
 
-/************************ CONSTUCTORS ****************************************/
+/* ------------------------------------------------------------------------- */
+/*                           Static Member Functions                         */
+/* ------------------------------------------------------------------------- */
+    Fixed&   Fixed::min(Fixed& a, Fixed& b)
+    {
+        return ((a.num < b.num ) ? a : b);
+    }            
+
+    Fixed&   Fixed::min(const Fixed& a, const Fixed& b)
+    {
+        return ((Fixed&)((a.num < b.num ) ? a : b));
+    }
+
+    Fixed&   Fixed::max(Fixed& a, Fixed& b)
+    {
+        return ((Fixed&)((a.num > b.num ) ? a : b));
+    }            
+
+    Fixed&   Fixed::max(const Fixed& a, const Fixed& b)
+    {
+        return ((Fixed&)((a.num > b.num ) ? a : b));
+    }
+
+/* ------------------------------------------------------------------------- */
+/*                                Constructors                               */
+/* ------------------------------------------------------------------------- */
 
 /* Default Constructor */
 Fixed::Fixed()
@@ -82,13 +107,17 @@ Fixed::Fixed(const int i)
 /* Float Constructor, converts f to the corresponding fixed-point value. */
 Fixed::Fixed(const float f)
 {
-    std::cout << "Float constructor called\n";
+    #ifndef NDEBUG
+        std::cout << "Float constructor called\n";
+    #endif // NDEBUG
 
     // Setting the binary point at (2 ^ frac)
     this->num = roundf(f * (1 << frac));
 }
 
-/************************ OPERATORS OVERLOAD *********************************/
+/* -------------------------------------------------------------------------- */
+/*                       Assignement operator overload                        */
+/* -------------------------------------------------------------------------- */
 
 /* Copy Assignement Operator */
 Fixed&  Fixed::operator=(const Fixed &other)
@@ -97,28 +126,67 @@ Fixed&  Fixed::operator=(const Fixed &other)
         std::cout << "Copy assignment operator called\n";
     #endif // NDEBUG
 
-    if (this != &other) // No self assignement
+    if (this != &other)
         this->num = other.getRawBits();
     return (*this);
 }
 
-/*---------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------- */
+/*                    Binary Arithmetic operators overload                    */
+/* -------------------------------------------------------------------------- */
+    Fixed   Fixed::operator+(const Fixed& rhs)
+    {
+        Fixed   res(this->toFloat() + rhs.toFloat());
+        return (res);
+    }
 
-/* 
-*   Pre & Post increment and decrement operators overload
-*   -----------------------------------------------------
-*   Returning a reference to mimic the behaviour in cpp
-*   int a = 5; b = ++a; | <-- | a is incremented 'BEFORE' getting assigned to b
-*   
-*   Returning a copy of the original object to mimic the behaviour in cpp
-*   int a = 5; b = a++; | <-- | a is incremented 'AFTER' getting assigned to b
-*
-*   [[[ same thing is applied to the pre and post decrement operators... ]]]
-*
-*   As a convention you must type the "int" in function Post, so the compiler
-*       differentiate between post and pre increment or decrement
-*       [[[ returnType operator symbol (int){ } ]]] | Symbol : -- or ++
-*/
+    Fixed   Fixed::operator-(const Fixed& rhs)
+    {
+        Fixed   res(this->toFloat() - rhs.toFloat());
+        return (res);
+        
+    }
+    Fixed   Fixed::operator*(const Fixed& rhs)
+    {
+        Fixed   res(this->toFloat() * rhs.toFloat());
+        return (res);
+        
+    }
+    Fixed   Fixed::operator/(const Fixed& rhs)
+    {
+        Fixed   res(this->toFloat() / rhs.toFloat());
+        return (res);
+        
+    }
+
+/* -------------------------------------------------------------------------- */
+/*                        Extraction Operator Overload                        */
+/* -------------------------------------------------------------------------- */
+
+/* Prints FixedPoint value expressed as a float */
+std::ostream&   operator<<(std::ostream& os, const Fixed &obj)
+{
+    return (os << obj.toFloat());
+}
+
+/* ------------------------------------------------------------------------- */
+/*                  Increment & Decrement Operators Overload                 */
+/* ------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------- */
+/*   Pre & Post                                                              */
+/*   ----------                                                              */
+/*   Returning a reference to mimic the behaviour in cpp                     */
+/*   int a = 5; b = ++a; | <-- | a is incremented 'BEFORE' assignement       */
+/*                                                                           */
+/*   Returning a copy of the original object to mimic the behaviour in cpp   */
+/*   int a = 5; b = a++; | <-- | a is incremented 'AFTER' assignement        */
+/*                                                                           */
+/*   [[[ same thing is applied to the pre and post decrement operators... ]]]*/
+/*                                                                           */
+/*   As a convention you must type the int in function Post, so the compiler */
+/*       differentiate between post and pre increment or decrement           */
+/*       [[[ returnType operator symbol (int){ } ]]] | Symbol : -- or ++     */
+/* ------------------------------------------------------------------------- */
 
 Fixed&  Fixed::operator++()
 {
@@ -144,22 +212,47 @@ Fixed   Fixed::operator--(int)
 {
     Fixed   original(*this);
 
-    this->num--;
+    num--;
     return(original);
 }
+/* ------------------------------------------------------------------------- */
+/*                       Comparaison Operators Overload                      */
+/* ------------------------------------------------------------------------- */
 
-/*---------------------------------------------------------------------------*/
-
-/* Prints FixedPoint value expressed as a float */
-std::ostream&   operator<<(std::ostream& os, const Fixed &obj)
+bool    Fixed::operator>(const Fixed& rhs)
 {
-    return (os << obj.toFloat());
+    return (this->num > rhs.num);
 }
 
+bool    Fixed::operator<(const Fixed& rhs)
+{
+    return (this->num < rhs.num);
+}
 
-/************************ DESTRUCTOR *****************************************/
+bool    Fixed::operator>=(const Fixed& rhs)
+{
+    return (this->num >= rhs.num);
+}
 
-/* Destructor */
+bool    Fixed::operator<=(const Fixed& rhs)
+{
+    return (this->num <= rhs.num);
+}
+
+bool    Fixed::operator==(const Fixed& rhs)
+{
+    return (this->num == rhs.num);
+}
+
+bool    Fixed::operator!=(const Fixed& rhs)
+{
+    return (this->num != rhs.num);
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                 Destructor                                */
+/* ------------------------------------------------------------------------- */
+
 Fixed::~Fixed()
 {
     #ifndef NDEBUG
