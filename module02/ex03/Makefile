@@ -10,7 +10,8 @@ DEPS_FLAGS = -MMD -MP
 
 SRC =	main.cpp \
 		Fixed.cpp \
-		Point.cpp
+		Point.cpp \
+		bsp.cpp
 
 OBJ_DIR = obj
 

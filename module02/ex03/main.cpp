@@ -1,19 +1,24 @@
-#include "Fixed.hpp"
 #include "Point.hpp"
 
+// Compilation:
+// make CXXFLAGS+="-DNDEBUG -DNDEBUG_BSP"
 int main(void)
 {
-    Point   s(66.5, 662.4);
-    Point   k(6.5, 6.4);
-    Point   a(s);
+    Point   a(0.0, 1.0);
+    Point   b(2.0, 2.0);
+    Point   c(2.0, 0.0);
+    Point   point(1.90, 0.5);
 
-
-    std::cout << a.getX() << " | " << a.getY() << std::endl;
-    std::cout << s.getX() << " | " << s.getY() << std::endl;
-
-    a = k;
-
-    std::cout << a.getX() << " | " << a.getY() << std::endl;
+    #ifndef NDEBUG
+        std::cout << a.getX() << " | " << a.getY() << std::endl;
+        std::cout << b.getX() << " | " << b.getY() << std::endl;
+        a = c;
+        std::cout << a.getX() << " | " << a.getY() << std::endl;
+    #endif // NDEBUG
+    if (bsp(a, b, c, point) == 1)
+        std::cout << "True" << std::endl;
+    else
+        std::cout << "False" << std::endl;
 
     return 0;
 }
