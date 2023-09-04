@@ -8,7 +8,7 @@
 *       Shoelace Formula;
 *       ----------------
 * -------------------------------------------------------------------------- *
-*       Area of Δ = 1/2 * | x1(y2 − y3) + x2(y3 − y1) + x3(y1 − y2) |         *
+*       Area of Δ = 1/2 * | x1(y2 − y3) + x2(y3 − y1) + x3(y1 − y2) |        *
 * -------------------------------------------------------------------------- *
 *   source: https://artofproblemsolving.com/wiki/index.php/Shoelace_Theorem
 */
@@ -31,29 +31,29 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
     Fixed div(0.5f);
 
     Fixed   totalArea = shoeLace(a, b, c);
-    #ifndef NDEBUG_BSP
+    #ifndef NDEBUG
         std::cout << "Total Area = " << totalArea << std::endl;
-    #endif // NDEBUG_BSP
+    #endif // NDEBUG
     
     Fixed   subArea1 = shoeLace(point, b, c);
-    #ifndef NDEBUG_BSP
+    #ifndef NDEBUG
         std::cout << "subArea1 = " << subArea1 << std::endl;
-    #endif // NDEBUG_BSP
+    #endif // NDEBUG
 
     Fixed   subArea2 =  shoeLace(a, point, c);
-    #ifndef NDEBUG_BSP
+    #ifndef NDEBUG
         std::cout << "subArea2 = " << subArea2 << std::endl;
-    #endif // NDEBUG_BSP
+    #endif // NDEBUG
 
     Fixed   subArea3 = shoeLace(a, b, point);
-    #ifndef NDEBUG_BSP
+    #ifndef NDEBUG
         std::cout << "subArea3 = " << subArea3 << std::endl;
-    #endif // NDEBUG_BSP
+    #endif // NDEBUG
 
     Fixed sum = subArea1 + subArea2 + subArea3;
-    #ifndef NDEBUG_BSP
+    #ifndef NDEBUG
         std::cout << "Sum = " << sum << std::endl;
-    #endif // NDEBUG_BSP
+    #endif // NDEBUG
 
     if (subArea1 == 0 || subArea2 == 0 || subArea3 == 0 || sum != totalArea)
         return (false);
