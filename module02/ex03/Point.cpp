@@ -1,16 +1,16 @@
 #include "Point.hpp"
 
 /*
-    Base Initializers
-    -----------------
-    - For initialization of reference members (const int t;)
-    - For initialization of non-static const data members (int &t;)
-    - For initialization of member objects which do not have default constructor
-    - For initialization of base class members
-    - When constructor’s parameter name is same as data member 
-    - For Performance reasons
-
-
+*    Base Initializers
+*    -----------------
+*    - For initialization of reference members (const int t;)
+*    - For initialization of non-static const data members (int &t;)
+*    - For initialization of member objects which do not have default constructor
+*    - For initialization of base class members
+*    - When constructor’s parameter name is same as data member 
+*    - For Performance reasons
+*
+*
 *   Source: https://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/
 */
 

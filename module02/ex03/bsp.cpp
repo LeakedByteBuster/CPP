@@ -10,10 +10,11 @@
 * -------------------------------------------------------------------------- *
 *       Area of Δ = 1/2 * | x1(y2 − y3) + x2(y3 − y1) + x3(y1 − y2) |        *
 * -------------------------------------------------------------------------- *
+*
 *   source: https://artofproblemsolving.com/wiki/index.php/Shoelace_Theorem
 */
 
-static Fixed shoeLace(Point const a, Point const b, Point const c)
+static Fixed shoelaceFormula(Point const a, Point const b, Point const c)
 {
     Fixed div(0.5f);
 
@@ -30,22 +31,22 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
     Fixed div(0.5f);
 
-    Fixed   totalArea = shoeLace(a, b, c);
+    Fixed   totalArea = shoelaceFormula(a, b, c);
     #ifndef NDEBUG
         std::cout << "Total Area = " << totalArea << std::endl;
     #endif // NDEBUG
     
-    Fixed   subArea1 = shoeLace(point, b, c);
+    Fixed   subArea1 = shoelaceFormula(point, b, c);
     #ifndef NDEBUG
         std::cout << "subArea1 = " << subArea1 << std::endl;
     #endif // NDEBUG
 
-    Fixed   subArea2 =  shoeLace(a, point, c);
+    Fixed   subArea2 =  shoelaceFormula(a, point, c);
     #ifndef NDEBUG
         std::cout << "subArea2 = " << subArea2 << std::endl;
     #endif // NDEBUG
 
-    Fixed   subArea3 = shoeLace(a, b, point);
+    Fixed   subArea3 = shoelaceFormula(a, b, point);
     #ifndef NDEBUG
         std::cout << "subArea3 = " << subArea3 << std::endl;
     #endif // NDEBUG

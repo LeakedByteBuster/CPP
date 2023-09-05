@@ -47,7 +47,7 @@ public :
 /* ------------------------------------------------------------------------- */
 /*                           Static Member Functions                         */
 /* ------------------------------------------------------------------------- */
-    /* NOTE:: if a == b, a reference to b is returned. min() & Max() */
+    /* NOTE:: if a == b, a reference to b is returned for both min() & Max() */
     static Fixed&   min(Fixed& a, Fixed& b);             /* Returns smallest */
     static Fixed&   min(const Fixed& a, const Fixed& b); /* Returns smallest */
     static Fixed&   max(Fixed& a, Fixed& b);             /* Returns biggest */

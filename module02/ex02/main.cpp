@@ -44,7 +44,9 @@
 #include <iostream>
 #include "Fixed.hpp"
 
-/* make CXXFLAGS+="-DNDEBUG -DTEST_CASES" && ./FixedPoint */
+/* -------------------------------------------------------------------------- */
+/*          make CXXFLAGS+=-DNDEBUG -DTEST_CASES && ./FixedPoint              */
+/* -------------------------------------------------------------------------- */
 int main(void)
 {
 
@@ -119,7 +121,6 @@ int main(void)
         std::cout << "Operator: a - b - c = " << (a - b - c) << std::endl;
         std::cout << "Operator: a / b = " << (a / b) << std::endl;
         std::cout << "Operator: a / 2 = " << (a / 2) << std::endl;
-
 
         std::cout << std::endl;
 

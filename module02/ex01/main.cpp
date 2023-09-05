@@ -1,14 +1,13 @@
 /*
-*   IEE 754 : s ==> sign | e ==> exponent | 'm' => mantissa 
+*   IEE 754 : s ==> sign | e ==> exponent | 'm' => mantissa
 *                             | n ==> number of bits for fractional part
 *   
 *   1.  Multiplication of floating numbers
 *           [ Formula (m1 * m2) * (2 ^ (e1 + e2)) ]
 *   2.  Multiply the given float or int number by (2 ^ n)
-*   3.  round the result before storing it the fixed point
-*   4.  convert your fixed point representation to float by:
+*   3.  round the result before storing it the fixed point, if needed
+*   4.  convert your fixed point representation back to float or int by:
 *           [  FixedPointRepresentation / 2^n ]
-*   5. To 
 *   Note: std::cout its precision is up 5
 */
 

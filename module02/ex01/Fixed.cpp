@@ -93,7 +93,6 @@ std::ostream&   operator<<(std::ostream& os, const Fixed &obj)
     return (os << obj.toFloat());
 }
 
-
 /************************ DESTRUCTOR *****************************************/
 
 /* Destructor */

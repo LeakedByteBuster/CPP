@@ -21,20 +21,6 @@ INC_HEADERS = -I. -Iutils
 
 RM = rm -rf
 
-TMP = ===========
-
-EQ = ===========
-
-HBLK = '\e[1;90m'
-HRED = '\e[1;91m'
-HGRN = '\e[1;92m'
-HYEL = '\e[1;93m'
-HBLU = '\e[1;94m'
-HMAG = '\e[1;95m'
-HCYN = '\e[1;96m'
-HWHT = '\e[1;97m'
-NC ='\033[0m'
-
 all : $(NAME)
 
 $(NAME) : $(OBJS)

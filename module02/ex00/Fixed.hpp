@@ -1,22 +1,18 @@
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
-// num ==> number part | | frac ==> fraction part
-/* Fixed point */
-class   Fixed{
+
+class   Fixed{ /* Fixed point */
 private:
-    int                 num;
-    static const int    frac;
+    int                 num;    /* Integer part */
+    static const int    frac; /*  Fractional part  */
 
 public :
-    /* Default Constructor */
-    Fixed();
-    /* Copy Constructor */
-    Fixed(const Fixed &);
-    /* Copy Assignement Operator */
-    Fixed&  operator=(const Fixed &);
-    /* Destructor */
-    ~Fixed();
+    
+    Fixed(); /* Default Constructor */
+    Fixed(const Fixed &); /* Copy Constructor */
+    Fixed&  operator=(const Fixed &); /* Copy Assignement Operator */
+    ~Fixed(); /* Destructor */
 
     int getRawBits(void) const;
     void setRawBits(int const);

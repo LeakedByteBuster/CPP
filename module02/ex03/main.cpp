@@ -27,7 +27,7 @@
 # define MAX_TEST_CASES 10000
 #endif // MAX_TEST_CASES
 
-#define LIMIT_TEST_CASES 100000
+#define LIMIT_TEST_CASES 10000
 
 static inline float   randFloat(int num, int range){
     return ((float)(num / (float)(rand() % range)));
@@ -140,7 +140,7 @@ int main(void)
         std::cout << MAX_TEST_CASES << std::endl;
         if (MAX_TEST_CASES > LIMIT_TEST_CASES)
         {
-            std::cerr << "Error: StackOverflow will occur: MAX_TEST_CASES limit is" \
+            std::cerr << "Error: StackOverflow will occur: MAX_TEST_CASES limit is " \
                 << LIMIT_TEST_CASES << std::endl;
             exit(1);
         }
