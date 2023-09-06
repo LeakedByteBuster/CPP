@@ -110,25 +110,7 @@ void    testCases()
     std::cout << "TrueCases = " << _t << " | FalseCases = " << _f << std::endl;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                     Normal Compilation:                                    */
-/*       => make re CXXFLAGS+="-DNDEBUG"                                      */
-/*                                                                            */
-/*                   TestCases Compilation:                                   */
-/*       => make re CXXFLAGS+="-DNDEBUG -DTEST_CASES"                         */
-/*                                                                            */
-/*                   Changing Number of TestCases Compilation:                */
-/*       => make re CXXFLAGS+="-DNDEBUG -DTEST_CASES -DMAX_TEST_CASES=1000"   */
-/*                                                                            */
-/*                   TestCases With FalseCases Compilation:                   */
-/*       => make re CXXFLAGS+="-DNDEBUG -DTEST_CASES -DSHOW_FALSE_CASES"      */
-/*                                                                            */
-/*                      Debug Compilation:                                    */
-/*       => make re                                                           */
-/*                                                                            */
 /*   20 bits are used to represent the fractional part, 11 bits for integer   */
-/* -------------------------------------------------------------------------- */
-
 int main(void)
 {
     Point   a(0.0, 1.0);

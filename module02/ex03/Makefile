@@ -1,3 +1,12 @@
+#	Build:
+#	------
+#		Compilation :
+#		-------------
+#		make BUILD=ndebug		|| not showing messages from methods
+#		make BUILD=test			|| shows only true test cases
+#		make BUILD=false_cases	|| shows both false and true test cases
+
+
 NAME = bsp
 
 CXX = c++
@@ -22,6 +31,16 @@ DEPS = $(OBJS:%.o=%.d)
 INC_HEADERS = -I. -Iutils
 
 RM = rm -rf
+
+ifeq ($(BUILD), ndebug)
+	CXXFLAGS += -DNDEBUG
+else ifeq ($(BUILD), test)
+	CXXFLAGS +=-DNDEBUG -DTEST_CASES
+else ifeq ($(BUILD), false_cases)
+	CXXFLAGS+=-DNDEBUG -DTEST_CASES -DSHOW_FALSE_CASES
+else 
+	
+endif
 
 all : $(NAME)
 
