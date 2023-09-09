@@ -1,8 +1,35 @@
+# NOTE: "make re" is needed for the first compilation with a different flag
+# Compilation
+# -----------
+#	make re		: shows fight messages
+# make re BUILD=...
+# -----------------
+#	sanitize	: removes fight messages, and add sanitizer to compilation
+#	stats		: show stats of the player
+#	stop		: removes fight messages
+#	onlyStats	: shows only stats of the begining and end of the game
+#	debug		: removes fight messages, and activate debugging messages
+#	third		: adds a third player to test copy constructor
+
 NAME = ClapTrap
 
 CXX = c++
 
 CXXFLAGS = -Wall -Werror -Wextra
+
+ifeq ($(BUILD), sanitize)
+	CXXFLAGS+=-fsanitize=address -DDEBUG -DNOT_SIMULATE
+else ifeq ($(BUILD), stats)
+	CXXFLAGS+=-DSTATS
+else ifeq ($(BUILD), stop)
+	CXXFLAGS+=-DNOT_SIMULATE
+else ifeq ($(BUILD), onlyStats)
+	CXXFLAGS+=-DNOT_SIMULATE -DSTATS
+else ifeq ($(BUILD), debug)
+	CXXFLAGS+=-DNOT_SIMULATE -DDEBUG
+else ifeq ($(BUILD), third)
+	CXXFLAGS+=-DTHIRD -DSTATS
+endif
 
 STD = -std=c++98
 

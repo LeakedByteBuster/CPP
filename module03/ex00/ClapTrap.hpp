@@ -12,23 +12,46 @@ private :
     int         attackDamage;
 
 public :
+
+/* -------------------------------------------------------------------------- */
+/*                               Orthodox Form                                */
+/* -------------------------------------------------------------------------- */
     ClapTrap(std::string name); /* Default Constructor */
     ClapTrap(const ClapTrap &); /* Copy Constructor */
-    ClapTrap    operator=(const ClapTrap &); /* Copy Assignement Operator */
+    ClapTrap&    operator=(const ClapTrap &); /* Copy Assignement Operator */
     ~ClapTrap(); /* Destructor */
 
-    void attack(const std::string& target); /*  */
+/* -------------------------------------------------------------------------- */
+/*                                  Methods                                   */
+/* -------------------------------------------------------------------------- */
+    /* target loses <attack damage> hit points, Attacking costs 1 energy */
+    void attack(const std::string& target);
+    /* The player loses <amount> hitPoints */
     void takeDamage(unsigned int amount);
+    /* Gets <amount> hit points back, repairing costs 1 energy point each. */
     void beRepaired(unsigned int amount);
 
+/* -------------------------------------------------------------------------- */
+/*                                  Getters                                   */
+/* -------------------------------------------------------------------------- */
+    /* Method used to get name private attribute */
     std::string getName() const;
+    /* Method used to get hitPoints private attribute */
     int        getHitPoints() const;
+    /* Method used to get energyPoints private attribute */
     int        getEnergyPoints() const;
+    /* Method used to get attackDamage private attribute */
     int        getAttackDamage() const;
-    
+
+/* -------------------------------------------------------------------------- */
+/*                                  Setters                                   */
+/* -------------------------------------------------------------------------- */
+    /* Method used to set HitPoints private attribute */
     void    setHitPoints(const int);
+    /* Method used to set energyPoints private attribute */
     void    setEnergyPoints(const int);
-    void    setAttackDamage(const int);
+    /* Method used to set attackDamage private attribute */
+    void    setAttackDamage(const int); 
 
 };
 
