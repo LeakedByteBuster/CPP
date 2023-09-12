@@ -45,7 +45,7 @@ OBJS = $(patsubst %, $(OBJ_DIR)/%, $(SRC:.cpp=.o))
 
 DEPS = $(OBJS:%.o=%.d)
 
-INC_HEADERS = -Iinclude
+INC_HEADERS = -I.
 
 RM = rm -rf
 
