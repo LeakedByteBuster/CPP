@@ -8,13 +8,13 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
     #endif // DEBUG
 
     #ifndef NOT_SIMULATE
-        std::cout << "ScavTrap " << getName() <<" steps into the ring 🤼" \
+        std::cout << "ScavTrap " << name <<" steps into the ring 🤼" \
             << std::endl;
     #endif // NOT_SIMULATE
 
-    this->setHitPoints(100);
-    this->setEnergyPoints(50);
-    this->setAttackDamage(20);
+    hitPoints = 100;
+    energyPoints = 50;
+    attackDamage = 20;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other.getName())
@@ -33,16 +33,16 @@ ScavTrap&   ScavTrap::operator=(const ScavTrap &rhs)
     #endif // DEBUG
 
     #ifndef NOT_SIMULATE
-        std::cout << "ScavTrap " << getName() <<" step into the ring 🤼" \
+        std::cout << "ScavTrap " << name <<" step into the ring 🤼" \
             << std::endl;
     #endif // NOT_SIMULATE
 
     if (this != &rhs)
     {
-        this->setName(rhs.getName());
-        this->setHitPoints(rhs.getHitPoints());
-        this->setAttackDamage(rhs.getAttackDamage());
-        this->setEnergyPoints(rhs.getEnergyPoints());
+        name = rhs.getName();
+        hitPoints = rhs.getHitPoints();
+        attackDamage = rhs.getAttackDamage();
+        energyPoints = rhs.getEnergyPoints();
     }
     return (*this);
 }
@@ -54,14 +54,14 @@ ScavTrap::~ScavTrap()
     #endif // DEBUG
     
     #ifndef NOT_SIMULATE
-        std::cout << getName() << " is packing up his stuff" << std::endl;
+        std::cout << name << " is packing up his stuff" << std::endl;
     #endif // NOT_SIMULATE
 }
 
 void        ScavTrap::guardGate()
 {
     #ifndef NOT_SIMULATE
-        std::cout << getName() << " entered in" << HWHT << \
+        std::cout << name << " entered in" << HWHT << \
             " Gate keeper mode" << NC << std::endl;
     #endif // NOT_SIMULATE
     return ;

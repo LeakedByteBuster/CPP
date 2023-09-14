@@ -6,8 +6,8 @@
 class   FragTrap : virtual public ClapTrap {
 
 private:
-    int attackDamage;
-    int hitPoints;
+    int attackDamage2;
+    int hitPoints2;
 
 public :
     FragTrap(std::string);
@@ -18,8 +18,8 @@ public :
     /* Displays a positive high fives request on the standard output */
     void    highFivesGuys(void);
     void    attack(const std::string& target);
-    int     getHitPoints() const;
-    int     getAttackDamage() const;
+    int     getHitPoints2() const;
+    int     getAttackDamage2() const;
 
 
 };

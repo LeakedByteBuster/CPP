@@ -90,6 +90,7 @@ void ClapTrap::attack(const std::string& target)
         #ifndef NOT_SIMULATE
             std::cout << name << " cannot attack. 0 energy!\n";
         #endif // NOT_SIMULATE
+        return ;
     }
 
     energyPoints -= 1;

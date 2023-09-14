@@ -1,20 +1,22 @@
 #include <iostream>
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name), attackDamage(30), hitPoints(100)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
     #ifdef DEBUG
         std::cout << "FragTrap parameterized constructor is called" << std::endl;
     #endif // DEBUG
 
     #ifndef NOT_SIMULATE
-        std::cout << "FragTrap " << getName() <<" is ready for the fight 👊" \
+        std::cout << "FragTrap " << name <<" is ready for the fight 👊" \
             << std::endl;
     #endif // NOT_SIMULATE
 
-    this->setHitPoints(100);
-    this->setEnergyPoints(100);
-    this->setAttackDamage(30);
+    this->attackDamage2 = 30;
+    this->hitPoints2 = 100;
+    hitPoints = 100;
+    energyPoints = 100;
+    attackDamage = 30;
 }
 
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other.getName())
@@ -33,16 +35,16 @@ FragTrap& FragTrap::operator=(const FragTrap &rhs)
     #endif // DEBUG
 
     #ifndef NOT_SIMULATE
-        std::cout << "FragTrap " << getName() <<" is ready for the fight 👊" \
+        std::cout << "FragTrap " << name <<" is ready for the fight 👊" \
             << std::endl;
     #endif // NOT_SIMULATE
 
     if (this != &rhs)
     {
-        this->setName(rhs.getName());
-        this->setHitPoints(rhs.getHitPoints());
-        this->setAttackDamage(rhs.getAttackDamage());
-        this->setEnergyPoints(rhs.getEnergyPoints());
+        name = rhs.getName();
+        hitPoints = rhs.getHitPoints();
+        attackDamage = rhs.getAttackDamage();
+        energyPoints = rhs.getEnergyPoints();
     }
     return (*this);
 }
@@ -54,7 +56,7 @@ FragTrap::~FragTrap()
     #endif // DEBUG
 
     #ifndef NOT_SIMULATE
-        std::cout << getName() << " is getting out of the ring" << std::endl;
+        std::cout << name << " is getting out of the ring" << std::endl;
     #endif // NOT_SIMULATE
 }
 
@@ -62,7 +64,7 @@ FragTrap::~FragTrap()
 void    FragTrap::highFivesGuys(void)
 {
     #ifndef NOT_SIMULATE
-        std::cout << getName() << " requested a " << HWHT << \
+        std::cout << name << " requested a " << HWHT << \
             " High Five!" << NC << std::endl;
     #endif // NOT_SIMULATE
     return ;
@@ -74,28 +76,28 @@ void FragTrap::attack(const std::string& target)
     #ifdef NOT_SIMULATE
         (void)target;
     #endif // NOT_SIMULATE
-    if (getEnergyPoints() <= 0)
+    if (energyPoints <= 0)
     {
         #ifndef NOT_SIMULATE
-            std::cout << getName() << " cannot attack. 0 energy!\n";
+            std::cout << name << " cannot attack. 0 energy!\n";
         #endif // NOT_SIMULATE
     }
 
-    setEnergyPoints((getEnergyPoints() - 1));
+    setEnergyPoints((energyPoints - 1));
 
     #ifndef NOT_SIMULATE
-        std::cout << getName() << " attacks " << target << \
+        std::cout << name << " attacks " << target << \
         " (SHOUUTS...🔊 Figaroooooooooo!)" << std::endl;
     #endif // NOT_SIMULATE
     return ;
 }
 
-int     FragTrap::getAttackDamage() const
+int     FragTrap::getAttackDamage2() const
 {
-    return (this->attackDamage);
+    return (this->attackDamage2);
 }
 
-int     FragTrap::getHitPoints() const
+int     FragTrap::getHitPoints2() const
 {
-    return (this->hitPoints);
+    return (this->hitPoints2);
 }

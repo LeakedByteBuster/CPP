@@ -27,9 +27,9 @@ else ifeq ($(BUILD), nothing)
 else ifeq ($(BUILD), onlyStats)
 	CXXFLAGS+=-DNOT_SIMULATE -DSTATS
 else ifeq ($(BUILD), debug)
-	CXXFLAGS+=-DNOT_SIMULATE -DDEBUG
+	CXXFLAGS+=-DNOT_SIMULATE -DDEBUG 
 else ifeq ($(BUILD), debugAssign)
-	CXXFLAGS+=-DNOT_SIMULATE -DDEBUG -DASSIGN
+	CXXFLAGS+=-DNOT_SIMULATE -DDEBUG -DASSIGN -DSTATS
 endif
 
 STD = -std=c++98

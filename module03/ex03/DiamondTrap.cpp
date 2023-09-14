@@ -5,9 +5,9 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "\e[1;104m_clap_nam
                                              FragTrap(name), ScavTrap(name),
                                              name(name)
 {
-    ClapTrap::setHitPoints(FragTrap::getHitPoints());
+    ClapTrap::setHitPoints(FragTrap::getHitPoints2());
     ClapTrap::setEnergyPoints(ScavTrap::getEnergyPoints());
-    ClapTrap::setAttackDamage(FragTrap::getAttackDamage());
+    ClapTrap::setAttackDamage(FragTrap::getAttackDamage2());
 
     #ifdef DEBUG
         std::cout << "DiamondTrap parameterized constructor is called\n";

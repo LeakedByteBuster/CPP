@@ -51,8 +51,8 @@
         ROBOT(FragTrap &a, ScavTrap &b) \
         ROBOT(DiamondTrap &a, ScavTrap &b) \
         ROBOT(DiamondTrap &a, FragTrap &b) \
-        ROBOT(FragTrap &b, DiamondTrap &a) \
-        ROBOT(ScavTrap &b, DiamondTrap &a)
+        ROBOT(FragTrap &a, DiamondTrap &b) \
+        ROBOT(ScavTrap &a, DiamondTrap &b)
 
     /* Robot "name1" causes "attackDamage" amount to Robot "name2" */
     #define ROBOT(name1, name2) \
@@ -147,7 +147,7 @@ int main(void)
         ClapTrap    clap2("\e[1;92mClap2\033[0m");
         ScavTrap    scav2("\e[1;94mScav2\033[0m");
         FragTrap    frag2("\e[1;96mFrag2\033[0m");
-        DiamondTrap diam2("\e[1;104mﺶﺣﻮﻟﺍ\033[0m");
+
     #endif // ASSIGN
     
     std::cout << std::endl;
