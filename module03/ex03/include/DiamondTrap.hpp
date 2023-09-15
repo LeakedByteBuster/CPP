@@ -11,8 +11,8 @@ private:
 
 public:
     DiamondTrap(std::string name);
-    // DiamondTrap(const DiamondTrap&);
-    // DiamondTrap& operator=(const DiamondTrap&);
+    DiamondTrap(const DiamondTrap&);
+    DiamondTrap& operator=(const DiamondTrap&);
     ~DiamondTrap();
     
     // Displays both its name and its ClapTrap name

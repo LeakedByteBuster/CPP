@@ -60,10 +60,20 @@ ScavTrap::~ScavTrap()
 
 void        ScavTrap::guardGate()
 {
-    #ifndef NOT_SIMULATE
-        std::cout << name << " entered in" << HWHT << \
-            " Gate keeper mode" << NC << std::endl;
-    #endif // NOT_SIMULATE
+    if (hitPoints > 0 && energyPoints > 0)
+    {
+        #ifndef NOT_SIMULATE
+            std::cout << name << " entered in" << HWHT << \
+                " Gate keeper mode" << NC << std::endl;
+        #endif // NOT_SIMULATE
+    }
+    else
+    {
+        #ifndef NOT_SIMULATE
+            std::cout << name << " cannot enter in" << HWHT << \
+                " Gate keeper mode" << NC << std::endl;
+        #endif // NOT_SIMULATE
+    }
     return ;
 }
 
@@ -73,14 +83,15 @@ void ScavTrap::attack(const std::string& target)
     #ifdef NOT_SIMULATE
         (void)target;
     #endif // NOT_SIMULATE
-    if (energyPoints <= 0)
+    if (energyPoints <= 0 || hitPoints <= 0)
     {
         #ifndef NOT_SIMULATE
-            std::cout << name << " cannot attack. 0 energy!\n";
+            std::cout << name << " cannot attack\n";
         #endif // NOT_SIMULATE
+        return ;
     }
 
-    setEnergyPoints((energyPoints - 1));
+    energyPoints -= 1;
 
     #ifndef NOT_SIMULATE
         std::cout << name << " attacks " << target << \

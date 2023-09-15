@@ -61,9 +61,19 @@ FragTrap::~FragTrap()
 /* Displays a positive high fives request on the standard output */
 void    FragTrap::highFivesGuys(void)
 {
-    #ifndef NOT_SIMULATE
-        std::cout << name << " requested a " << HWHT << \
-            " High Five!" << NC << std::endl;
-    #endif // NOT_SIMULATE
+    if (hitPoints > 0 && energyPoints > 0)
+    {
+        #ifndef NOT_SIMULATE
+            std::cout << name << " requested a " << HWHT << \
+                " High Five!" << NC << std::endl;
+        #endif // NOT_SIMULATE
+    }
+    else
+    {
+        #ifndef NOT_SIMULATE
+            std::cout << name << " cannot request a " << HWHT << \
+                " High Five!" << NC << std::endl;
+        #endif // NOT_SIMULATE   
+    }
     return ;
 }

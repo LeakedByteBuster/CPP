@@ -1,4 +1,5 @@
-# NOTE: "make re" is needed for the first compilation with a different flag
+# NOTE: "make re" is needed for the first compilation 
+#			(in case of using a different flag for BUILD variable)
 # Compilation
 # -----------
 #	make re		: shows fight messages
@@ -11,6 +12,8 @@
 #	onlyStats	: shows only stats of the begining and end
 #	debug		: removes fight messages, and activate debugging messages
 #	debugAssign	: same as "debug" but, it tests copy constructor
+#	energy		: sets energyPoints points of of all robots to 0
+#	health		: sets hitPoints points of of all robots to 0
 
 NAME = Diamond
 
@@ -22,6 +25,10 @@ ifeq ($(BUILD), sanitize)
 	CXXFLAGS+=-fsanitize=address -DDEBUG -DNOT_SIMULATE 
 else ifeq ($(BUILD), stats)
 	CXXFLAGS+=-DSTATS
+else ifeq ($(BUILD), health)
+	CXXFLAGS+=-DSTATS -DTEST_HEALTH
+else ifeq ($(BUILD), energy)
+	CXXFLAGS+=-DSTATS -DTEST_ENERGY
 else ifeq ($(BUILD), nothing)
 	CXXFLAGS+=-DNOT_SIMULATE
 else ifeq ($(BUILD), onlyStats)
@@ -62,7 +69,7 @@ $(NAME) : $(OBJS)
 	@ printf $(HBLU)
 	@ printf "==> "
 	@ printf $(HWHT)
-	$(CXX) $(CXXFLAGS) $(INC_HEADERS) $(OBJS) -o $(NAME)
+	$(CXX) $(STD) $(CXXFLAGS) $(INC_HEADERS) $(OBJS) -o $(NAME)
 	@ printf $(NC)
 
 $(OBJ_DIR)/%.o : %.cpp

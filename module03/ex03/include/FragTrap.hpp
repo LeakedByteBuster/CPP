@@ -6,8 +6,8 @@
 class   FragTrap : virtual public ClapTrap {
 
 private:
-    int attackDamage2;
     int hitPoints2;
+    int attackDamage2;
 
 public :
     FragTrap(std::string);

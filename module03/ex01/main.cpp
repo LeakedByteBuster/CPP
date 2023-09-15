@@ -35,7 +35,8 @@
     static inline void    attackRobot(ClapTrap &a, ClapTrap &b)
     {
         a.attack(b.getName());
-        b.takeDamage(a.getAttackDamage());
+        if (a.getHitPoints() > 0 && a.getEnergyPoints() > 0)
+            b.takeDamage(a.getAttackDamage());
         return ;
     }
 
@@ -43,7 +44,8 @@
     static inline void    attackRobot(ScavTrap &a, ScavTrap &b)
     {
         a.attack(b.getName());
-        b.takeDamage(a.getAttackDamage());
+        if (a.getHitPoints() > 0 && a.getEnergyPoints() > 0)
+            b.takeDamage(a.getAttackDamage());
         return ;
     }
 
@@ -51,7 +53,8 @@
     static inline void    attackRobot(ScavTrap &a, ClapTrap &b)
     {
         a.attack(b.getName());
-        b.takeDamage(a.getAttackDamage());
+        if (a.getHitPoints() > 0 && a.getEnergyPoints() > 0)
+            b.takeDamage(a.getAttackDamage());
         return ;
     }
 
@@ -59,7 +62,8 @@
     static inline void    attackRobot(ClapTrap &a, ScavTrap &b)
     {
         a.attack(b.getName());
-        b.takeDamage(a.getAttackDamage());
+        if (a.getHitPoints() > 0 && a.getEnergyPoints() > 0)
+            b.takeDamage(a.getAttackDamage());
         return ;
     }
 
@@ -80,7 +84,9 @@
 
         attackRobot(clap2, scav1);
         clap2.beRepaired(5);
-
+        
+        scav1.guardGate();
+        
         attackRobot(scav1, clap2);
 
         attackRobot(scav1, scav2);
@@ -89,6 +95,7 @@
 
         attackRobot(scav1, scav2);
         scav2.guardGate();
+        attackRobot(scav2, scav1);
         attackRobot(scav2, scav1);
         attackRobot(scav2, scav1);
         attackRobot(scav2, scav1);
@@ -113,6 +120,17 @@ int main(void)
     std::cout << std::endl;
 
     #ifdef STATS
+        #ifdef TEST_HEALTH
+            scav2.setHitPoints(0);
+            scav1.setHitPoints(0);
+            clap1.setHitPoints(0);
+            clap2.setHitPoints(0);
+        #elif TEST_ENERGY
+            clap1.setEnergyPoints(0);
+            clap2.setEnergyPoints(0);
+            scav2.setEnergyPoints(0);
+            scav1.setEnergyPoints(0);
+        #endif // DEATH
         std::cout <<
         "\n/* -------------------------------------------------------------------------- */\n"
         "/*                        📊 Fighters Initial Stats 📊                        */\n"

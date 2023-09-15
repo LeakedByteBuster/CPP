@@ -55,7 +55,8 @@
         static inline void    attackRobot(name1, name2) \
         { \
             a.attack(b.getName()); \
-            b.takeDamage(a.getAttackDamage()); \
+            if (a.getHitPoints() > 0 && a.getEnergyPoints() > 0) \
+                b.takeDamage(a.getAttackDamage()); \
             return ; \
         }
 
@@ -130,6 +131,23 @@ int main(void)
     std::cout << std::endl;
     
     #ifdef STATS
+
+        #ifdef TEST_HEALTH
+            scav1.setHitPoints(0);
+            scav2.setHitPoints(0);
+            clap1.setHitPoints(0);
+            clap2.setHitPoints(0);
+            frag1.setHitPoints(0);
+            frag2.setHitPoints(0);
+        #elif TEST_ENERGY
+            clap1.setEnergyPoints(0);
+            clap2.setEnergyPoints(0);
+            scav1.setEnergyPoints(0);
+            scav2.setEnergyPoints(0);
+            frag1.setEnergyPoints(0);
+            frag2.setEnergyPoints(0);
+        #endif // DEATH
+
         std::cout <<
         "\n/* -------------------------------------------------------------------------- */\n"
         "/*                        📊 Fighters Initial Stats 📊                        */\n"
@@ -140,7 +158,7 @@ int main(void)
 
     #ifndef NOT_SIMULATE
         simulateTheFight(clap1, clap2, scav1, scav2, frag1, frag2);
-        
+
         #ifdef STATS
             std::cout <<
             "\n/* -------------------------------------------------------------------------- */\n"

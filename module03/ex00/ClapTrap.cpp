@@ -86,10 +86,10 @@ void ClapTrap::attack(const std::string& target)
     #ifdef NOT_SIMULATE
         (void)target;
     #endif // NOT_SIMULATE
-    if (energyPoints <= 0)
+    if (energyPoints <= 0 || hitPoints <= 0)
     {
         #ifndef NOT_SIMULATE
-            std::cout << this->name << " cannot attack. 0 energy!\n";
+            std::cout << this->name << " cannot attack\n";
         #endif // NOT_SIMULATE
         return ;
     }
@@ -136,11 +136,10 @@ void ClapTrap::takeDamage(unsigned int amount)
 /* Gets <amount> hit points back, repairing costs 1 energy point each. */
 void    ClapTrap::beRepaired(unsigned int amount)
 {
-    if (energyPoints <= 0)
+    if (energyPoints <= 0 || hitPoints <= 0)
     {   
         #ifndef NOT_SIMULATE
-            std::cout << "ClapTrap " << this->name << ": cannot be healed\n" \
-                " 0 energy!\n";
+            std::cout << "ClapTrap " << this->name << ": cannot be healed\n";
         #endif // NOT_SIMULATE
         return ;
     }
