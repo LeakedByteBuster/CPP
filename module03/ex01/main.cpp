@@ -109,6 +109,7 @@ int main(void)
 {
     ClapTrap    clap1("\e[1;91mClap1\033[0m");
     ScavTrap    scav1("\e[1;93mScav1\033[0m");
+
     #ifdef ASSIGN
         ClapTrap    clap2(clap1);
         ScavTrap    scav2(scav1);

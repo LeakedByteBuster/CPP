@@ -1,6 +1,22 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
+ScavTrap::ScavTrap()
+{
+    #ifdef DEBUG
+        std::cout << "ScavTrap parameterized constructor is called" << std::endl;
+    #endif // DEBUG
+
+    #ifndef NOT_SIMULATE
+        std::cout << "ScavTrap " << name <<" steps into the ring 🤼" \
+            << std::endl;
+    #endif // NOT_SIMULATE
+
+    hitPoints = 100;
+    energyPoints = 50;
+    attackDamage = 20;
+}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
     #ifdef DEBUG

@@ -1,6 +1,22 @@
 #include <iostream>
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap()
+{
+    #ifdef DEBUG
+        std::cout << "FragTrap parameterized constructor is called" << std::endl;
+    #endif // DEBUG
+
+    #ifndef NOT_SIMULATE
+        std::cout << "FragTrap " << name <<" is ready for the fight 👊" \
+            << std::endl;
+    #endif // NOT_SIMULATE
+
+    hitPoints = 100;
+    energyPoints = 100;
+    attackDamage = 30;
+}
+
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
     #ifdef DEBUG

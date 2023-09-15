@@ -8,6 +8,19 @@
 /* -------------------------------------------------------------------------- */
 
 /* Default Constructor */
+ClapTrap::ClapTrap() : name(""), hitPoints(10),
+                        energyPoints(10), attackDamage(0)
+{
+    #ifdef DEBUG
+        std::cout << "Claptrap parameterized constructor is called" << std::endl;
+    #endif // DEBUG
+
+    #ifndef NOT_SIMULATE
+        std::cout << "ClapTrap " << name << " is making noises" << std::endl;
+    #endif // NOT_SIMULATE
+}
+
+/* Parameterized Constructor */
 ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10),
                                        energyPoints(10), attackDamage(0)
 {

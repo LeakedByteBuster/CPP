@@ -10,6 +10,7 @@ private:
     int attackDamage2;
 
 public :
+    FragTrap();
     FragTrap(std::string);
     FragTrap(const FragTrap &);
     FragTrap& operator=(const FragTrap &);
@@ -20,7 +21,6 @@ public :
     void    attack(const std::string& target);
     int     getHitPoints2() const;
     int     getAttackDamage2() const;
-
 
 };
 

@@ -15,6 +15,7 @@ int main(void)
 {
     ClapTrap    rob("\e[1;91mﺎﻳﺮﻴﻓﺎﺟ رﺎﺑﻮﻜﺳﺇ يﺩ ﻮﻠﺑﺎﺑ لﺇ تﺮﺑﻭﺭ\033[0m");
     ClapTrap    jay("\e[1;94mQuento El Pesos Del Handre\033[0m");
+
     #ifdef THIRD
         ClapTrap    twin(jay);
     #endif // THIRD

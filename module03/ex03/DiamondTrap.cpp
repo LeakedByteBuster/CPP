@@ -1,6 +1,22 @@
 #include <iostream>
 #include "DiamondTrap.hpp"
 
+DiamondTrap::DiamondTrap()
+{
+    ClapTrap::setHitPoints(FragTrap::getHitPoints2());
+    ClapTrap::setEnergyPoints(DiamondTrap::getEnergyPoints());
+    ClapTrap::setAttackDamage(FragTrap::getAttackDamage2());
+
+    #ifdef DEBUG
+        std::cout << "DiamondTrap parameterized constructor is called\n";
+    #endif // DEBUG
+    
+    #ifndef NOT_SIMULATE
+        std::cout << "...ﺶﻣ اﺬﻫ،رﻮﺨﻟ آﺭﺃ ﺎﺸﻣ اﺬﻫ ...ﻖﻳﺮﺗ ﻦﻣ ﺎﻳﻮﺧﺃ" \
+            "ﺪﻴﻴﺣﺍ ...ﺶﻣ اﺬﻫ،رﻮﺨﻟ آﺭﺍ ﺎﺸﻣ اﺬﻫ" << " " << name << std::endl;
+    #endif // NOT_SIMULATE
+}
+
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "\e[1;104m_clap_name\033[0m"), 
                                              FragTrap(name), ScavTrap(name),
                                              name(name)
