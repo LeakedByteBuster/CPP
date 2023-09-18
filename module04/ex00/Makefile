@@ -6,9 +6,17 @@
 #
 # make re BUILD=...
 # -----------------
-#	nothing		: removes messages printed by Animals
-#	debug		: add sanitizer
-#	assign		: tests copy constructor and copy assignement operator
+#	nothing		: Removes messages printed by Animals
+#	assign		: Tests copy constructor and copy assignement operator
+#	assignLeaks	: Tests leaks
+#	tests		: Activate test part [Allocationg and dealocating inside a loop]
+#	leaks		: Calls 'leaks' command using atexit(3) on normal classes
+#	build		: Shows constructors messages and one basic test
+#	wrong		: Use wrongClasses
+#	buildwrong	: Shows constructors messages from wrongClasses
+#	wrongLeaks	: Calls 'leaks' command using atexit(3) on wrong classes
+#	sanitize	: add sanitizer flag to the compilation
+#	nothing		: shows nothing on output
 
 NAME = zoo
 
@@ -18,16 +26,31 @@ CXXFLAGS = -Wall -Werror -Wextra
 
 ifeq ($(BUILD), tests)
 	CXXFLAGS+=-DTESTS
-else ifeq ($(BUILD), build)
-	CXXFLAGS+=-DCONSTROCTURS_MSG
-else ifeq ($(BUILD), buildOnly)
-	CXXFLAGS+=-DCONSTROCTURS_MSG -DSTOP_SIMULATION
-else ifeq ($(BUILD), nothing)
-	CXXFLAGS+=-DSTOP_SIMULATION
 else ifeq ($(BUILD), leaks)
 	CXXFLAGS+=-DTEST_LEAKS -DTESTS
+#----------------------------------
+else ifeq ($(BUILD), build)
+	CXXFLAGS+=-DCONSTROCTURS_MSG -DSTOP_SIMULATION
+#----------------------------------
+else ifeq ($(BUILD), assign)
+	CXXFLAGS+=-DASSIGN
+else ifeq ($(BUILD), assignLeaks)
+	CXXFLAGS+=-DASSIGN -DTEST_LEAKS
+else ifeq ($(BUILD), assignBuild)
+	CXXFLAGS+=-DASSIGN -DCONSTROCTURS_MSG -DSTOP_SIMULATION
+#----------------------------------
+else ifeq ($(BUILD), wrong)
+	CXXFLAGS+=-DWRONG_CLASSES
+else ifeq ($(BUILD), buildWrong)
+	CXXFLAGS+=-DWRONG_CLASSES -DSTOP_SIMULATION -DCONSTROCTURS_MSG
+else ifeq ($(BUILD), wrongLeaks)
+	CXXFLAGS+=-DTEST_LEAKS -DTESTS -DWRONG_CLASSES
+#----------------------------------
 else ifeq ($(BUILD), sanitize)
 	CXXFLAGS+=-fsanitize=address
+#----------------------------------
+else ifeq ($(BUILD), nothing)
+	CXXFLAGS+=-DSTOP_SIMULATION
 endif
 
 STD = -std=c++98
@@ -37,7 +60,9 @@ DEPS_FLAGS = -MMD
 SRC 	=	src/main.cpp \
 			src/Dog.cpp \
 			src/Cat.cpp \
-			src/Animal.cpp
+			src/Animal.cpp \
+			src/WrongClasses/WrongAnimal.cpp \
+			src/WrongClasses/WrongCat.cpp
 
 OBJ_DIR = obj
 
