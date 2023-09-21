@@ -2,7 +2,7 @@
 #define BRAIN_HPP
 
 #include <string>
-#define NUMBER_OF_IDEAS 100
+#define NUMBER_OF_IDEAS 10
 
 class Brain {
 private:

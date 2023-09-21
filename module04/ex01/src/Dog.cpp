@@ -2,12 +2,9 @@
 
 void    deepCopyDog(std::string dst[], const std::string src[])
 {
-    int i = 0;
-    while (!src[i].empty()){
+    for (int i = 0; i < NUMBER_OF_IDEAS; i++){
         dst[i] = src[i];
-        i++;
     }
-    return ;
 }
 
 Dog::Dog()
@@ -38,6 +35,7 @@ Dog&    Dog::operator=(const Dog &rhs)
     if (this == &rhs)
         return (*this);
 
+    ideas = new Brain();
     deepCopyDog(this->ideas->getIdeas(), rhs.ideas->getIdeas());
     type = rhs.getType();
 

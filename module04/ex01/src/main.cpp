@@ -3,10 +3,9 @@
 #include "Cat.hpp"
 #include "Brain.hpp"
 
-#ifdef  TESTS
-#   define NUMBER_OF_ANIMALS 10
-#endif  // TESTS
+#define NUMBER_OF_ANIMALS 10
 
+/* Testing Leaks */
 #ifdef TEST_LEAKS
     void    lk()
     {
@@ -15,7 +14,9 @@
     }
 #endif // TEST_LEAKS
 
+
 #ifdef TESTS
+    /* Loops Through NUMBER_OF_ANIMALS and prints NUMBER_OF_IDEAS strings*/
     #ifndef STOP_SIMULATION
         void    printArr(Animal **p)
         {
@@ -29,17 +30,14 @@
         }
     #endif // STOP_SIMULATION
 
+    /* Fill array of pointers with value "eat" */
     void    fillArray(std::string **arr)
     {
         int i = 0;
 
         while (arr[i]){
             for (int j = 0; j < NUMBER_OF_IDEAS; j++){
-                #ifndef ASSIGN
                     arr[i][j] = "eat...";
-                #else
-                    arr[i][j] = "Assign...";
-                #endif // ASSIGN
             }
             i++;
         }
@@ -47,6 +45,7 @@
         return ;
     }
 
+    /* Fills Half of an array with Cats and the other half with Dog */
     void    testUsingLoop()
     {
         Animal* zoo[NUMBER_OF_ANIMALS];
@@ -71,27 +70,57 @@
 
 int main()
 {
+    // Animal sp;
+
+    // std::cout << *sp.getIdeas() << std::endl;
     #ifndef ASSIGN
+        /* these two pointers are declared just to test virtual destructor */ 
         const Animal* pDog = new Dog();
         const Animal* pCat = new Cat();
+
+        #ifdef TESTS
+            /* Fills Half of an array with Cats and the other half with Dog */
+            testUsingLoop();
+        #endif // TESTS
+
+        std::cout << std::endl;
+
     #else
-        const Animal* pD = new Dog();
-        const Animal* pC = new Cat();
+        /* Creating two temporary pointers, then filling their std::string ideas */
+        const Dog* dogToCopy = new Dog();
+        const Animal* catToCopy = new Cat();
+        std::cout << std::endl;
+        std::string *p[3] = {dogToCopy->getIdeas(), catToCopy->getIdeas(), NULL};
+        /* Fill Array of ideas && Print array of ideas of both objects */
+        for (int i = 0; i < NUMBER_OF_IDEAS; i++){
+            p[0][i] = "CopyMeA...";
+            p[1][i] = "CopyMeB...";
+            #ifndef STOP_SIMULATION
+                std::cout << p[0][i];
+                std::cout << p[1][i];
+            #endif // STOP_SIMULATION
+        }
+        std::cout << std::endl << std::endl;
+        
+        /* Testing Copy constructor && assignment opearator of Dog & Cat*/
+        const Animal* pDog = new Dog(*dogToCopy);
+        const Animal* pCat = new Cat((Cat &)(*catToCopy));
+        std::string *p2[3] = {pDog->getIdeas(), pCat->getIdeas(), NULL};
+        /* Print Copied array of ideas of both objects */
+        #ifndef STOP_SIMULATION
+            for (int i = 0; i < NUMBER_OF_IDEAS; i++){
+                std::cout << p2[0][i];
+                std::cout << p2[1][i];
+            }
+            std::cout << std::endl << std::endl;
+        #endif // STOP_SIMULATION
 
-        const Animal* pDog = new Dog((Dog &)(*pD));
-        // fillArray(&pDog);
-        const Animal* pCat = new Cat((Cat &)*pC);
-        // printArr(&pCat);
+        /* Freeing temporary pointers */
+        delete  catToCopy;
+        delete  dogToCopy;
     #endif // ASSIGN
 
-    #ifdef TESTS
-        testUsingLoop();
-    #endif // TESTS
-
-    #ifdef ASSIGN
-        delete  pC;
-        delete  pD;
-    #endif // ASSIGN
+    /* Freeing main pointers */
     delete pCat;
     delete pDog;
 

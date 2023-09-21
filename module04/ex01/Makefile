@@ -30,10 +30,10 @@ else ifeq ($(BUILD), leaks)
 	CXXFLAGS+=-DTEST_LEAKS -DTESTS
 #----------------------------------
 else ifeq ($(BUILD), build)
-	CXXFLAGS+=-DCONSTROCTURS_MSG -DSTOP_SIMULATION
+	CXXFLAGS+=-DCONSTROCTURS_MSG -DSTOP_SIMULATION 
 #----------------------------------
 else ifeq ($(BUILD), assign)
-	CXXFLAGS+=-DASSIGN -DTESTS
+	CXXFLAGS+=-DASSIGN -fsanitize=address
 else ifeq ($(BUILD), assignLeaks)
 	CXXFLAGS+=-DASSIGN -DTEST_LEAKS
 else ifeq ($(BUILD), assignBuild)

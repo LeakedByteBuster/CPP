@@ -2,12 +2,9 @@
 
 void    deepCopyCat(std::string dst[], const std::string src[])
 {
-    int i = 0;
-    while (!src[i].empty()){
+    for (int i = 0; i < NUMBER_OF_IDEAS; i++){
         dst[i] = src[i];
-        i++;
     }
-    return ;
 }
 
 Cat::Cat()
@@ -37,7 +34,8 @@ Cat&    Cat::operator=(const Cat &rhs)
     //  Self assignement guard
     if (this == &rhs)
         return (*this);
-
+    
+    ideas = new Brain();
     deepCopyCat(this->ideas->getIdeas(), rhs.ideas->getIdeas());
     type = rhs.getType();
 
