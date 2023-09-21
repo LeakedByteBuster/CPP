@@ -62,6 +62,7 @@
         #ifndef STOP_SIMULATION
             printArr(zoo);
         #endif // STOP_SIMULATION
+        /* Freeing all allocated pointers */
         for (int i = 0; i < NUMBER_OF_ANIMALS; i++){
             delete  zoo[i];
         }
@@ -70,11 +71,9 @@
 
 int main()
 {
-    // Animal sp;
-
-    // std::cout << *sp.getIdeas() << std::endl;
     #ifndef ASSIGN
-        /* these two pointers are declared just to test virtual destructor */ 
+        /* these two pointers are declared just to test virtual destructor
+                "make re BUILD=build" to see them in action. */
         const Animal* pDog = new Dog();
         const Animal* pCat = new Cat();
 
@@ -101,23 +100,22 @@ int main()
             #endif // STOP_SIMULATION
         }
         std::cout << std::endl << std::endl;
-        
-        /* Testing Copy constructor && assignment opearator of Dog & Cat*/
+
+        /* Testing Deep Copy of Dog & Cat */
         const Animal* pDog = new Dog(*dogToCopy);
-        const Animal* pCat = new Cat((Cat &)(*catToCopy));
-        std::string *p2[3] = {pDog->getIdeas(), pCat->getIdeas(), NULL};
+        Animal* pCat = new Cat((Cat &)(*catToCopy));
+        /* Freeing temporary pointers */
+        delete  catToCopy;
+        delete  dogToCopy;
         /* Print Copied array of ideas of both objects */
         #ifndef STOP_SIMULATION
+            std::string *p2[3] = {pDog->getIdeas(), pCat->getIdeas(), NULL};
             for (int i = 0; i < NUMBER_OF_IDEAS; i++){
                 std::cout << p2[0][i];
                 std::cout << p2[1][i];
             }
             std::cout << std::endl << std::endl;
         #endif // STOP_SIMULATION
-
-        /* Freeing temporary pointers */
-        delete  catToCopy;
-        delete  dogToCopy;
     #endif // ASSIGN
 
     /* Freeing main pointers */

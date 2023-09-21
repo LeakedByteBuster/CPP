@@ -59,6 +59,5 @@ void    Animal::makeSound() const
 
 std::string*        Animal::getIdeas() const
 {
-    return ((std::string *)("???UndefinedRequest || Don't Dereference Next" \
-        " Address???"));
+    return ((std::string *)(""));
 }

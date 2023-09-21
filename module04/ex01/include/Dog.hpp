@@ -15,6 +15,7 @@ public :
     virtual ~Dog();
 
     void            makeSound() const;
+    /* Returns a pointer TO AN ARRAY OF STRINGS Brain::getIdeas*/
     std::string*    getIdeas() const;
 
 };

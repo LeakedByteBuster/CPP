@@ -16,6 +16,7 @@ public :
     Animal&    operator=(const Animal &);
     virtual ~Animal();
 
+    /* Returns a pointer to a string "NOT TO AN ARRAY OF STRINGS"*/
     virtual std::string*        getIdeas() const;
     virtual void                makeSound() const;
     std::string                 getType() const;

@@ -15,6 +15,7 @@ public:
     ~Brain();
 
     void                setIdeas(const std::string []);
+    /* Returns a pointer TO AN ARRAY OF STRINGS"*/
     std::string*        getIdeas() const;
 };
 
