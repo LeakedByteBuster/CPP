@@ -16,7 +16,8 @@ public :
 /* -------------------------------------------------------------------------- */
 /*                               Orthodox Form                                */
 /* -------------------------------------------------------------------------- */
-    ClapTrap(std::string name); /* Default Constructor */
+    ClapTrap(); /* Default Constructor */
+    ClapTrap(std::string name); /* Parameterized Constructor */
     ClapTrap(const ClapTrap &); /* Copy Constructor */
     ClapTrap&    operator=(const ClapTrap &); /* Copy Assignement Operator */
     ~ClapTrap(); /* Destructor */

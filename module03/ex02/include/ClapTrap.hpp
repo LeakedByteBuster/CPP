@@ -8,7 +8,7 @@
 
 class ClapTrap{
 
-private :
+protected :
     std::string name;
     int         hitPoints; /*  represent the health of the ClapTrap  */
     int         energyPoints;
@@ -19,7 +19,8 @@ public :
 /* -------------------------------------------------------------------------- */
 /*                               Orthodox Form                                */
 /* -------------------------------------------------------------------------- */
-    ClapTrap(std::string); /* Default Constructor */
+    ClapTrap(); /* Default Constructor */
+    ClapTrap(std::string); /* Parameterized Constructor */
     ClapTrap(const ClapTrap &); /* Copy Constructor */
     ClapTrap&    operator=(const ClapTrap &); /* Copy Assignement Operator */
     ~ClapTrap(); /* Destructor */

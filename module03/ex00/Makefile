@@ -27,14 +27,13 @@ else ifeq ($(BUILD), onlyStats)
 	CXXFLAGS+=-DNOT_SIMULATE -DSTATS
 else ifeq ($(BUILD), debug)
 	CXXFLAGS+=-DNOT_SIMULATE -DDEBUG
-else ifeq ($(BUILD), third)
+else ifeq ($(BUILD), debugAssign)
 	CXXFLAGS+=-DTHIRD -DSTATS
 endif
 
 STD = -std=c++98
 
 DEPS_FLAGS = -MMD -MP
-
 
 SRC 	=	main.cpp \
 			ClapTrap.cpp
@@ -64,7 +63,7 @@ NC ='\033[0m'
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(STD) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o : %.cpp
 	@ mkdir -p $(dir $@)

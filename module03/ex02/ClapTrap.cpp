@@ -8,6 +8,19 @@
 /* -------------------------------------------------------------------------- */
 
 /* Default Constructor */
+ClapTrap::ClapTrap() : name(""), hitPoints(10),
+                        energyPoints(10), attackDamage(0)
+{
+    #ifdef DEBUG
+        std::cout << "Claptrap parameterized constructor is called" << std::endl;
+    #endif // DEBUG
+
+    #ifndef NOT_SIMULATE
+        std::cout << "ClapTrap " << name << " step into the ring 🤼" << std::endl;
+    #endif // NOT_SIMULATE
+}
+
+/* Parameterized Constructor */
 ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10),
                                        energyPoints(10), attackDamage(0)
 {
@@ -79,11 +92,12 @@ void ClapTrap::attack(const std::string& target)
     #ifdef NOT_SIMULATE
         (void)target;
     #endif // NOT_SIMULATE
-    if (energyPoints <= 0)
+    if (energyPoints <= 0 || hitPoints <= 0)
     {
         #ifndef NOT_SIMULATE
-            std::cout << name << " cannot attack. 0 energy!\n";
+            std::cout << name << " cannot attack\n";
         #endif // NOT_SIMULATE
+        return ;
     }
 
     energyPoints -= 1;
@@ -128,11 +142,10 @@ void ClapTrap::takeDamage(unsigned int amount)
 /* Gets <amount> hit points back, repairing costs 1 energy point each. */
 void    ClapTrap::beRepaired(unsigned int amount)
 {
-    if (energyPoints <= 0)
+    if (energyPoints <= 0 || hitPoints <= 0)
     {   
         #ifndef NOT_SIMULATE
-            std::cout << "ClapTrap " << name << ": cannot be healed\n" \
-                " 0 energy!\n";
+            std::cout << name << " cannot be healed\n";
         #endif // NOT_SIMULATE
         return ;
     }
@@ -143,7 +156,7 @@ void    ClapTrap::beRepaired(unsigned int amount)
         hitPoints = 100;
     else if (hitPoints > 10 && energyPoints <= 10)
         hitPoints = 10;
-    
+
     #ifndef NOT_SIMULATE
         std::cout << name << " received " << amount << " hitPoints" \
             << " (current hitPoints is " << hitPoints << ")" << std::endl;
