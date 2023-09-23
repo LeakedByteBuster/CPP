@@ -6,11 +6,12 @@
 #
 # make re BUILD=...
 # -----------------
-#	tests		: Activate test part [Allocationg and dealocating inside a loop]
+#	tests		: Activate test part
+#	testsLeaks	: Activate test part && check leaks
 #	leaks		: Calls 'leaks' command using atexit(3) (Default Constructor)
 #	build		: Shows messages of constructors and destructors (Default Constructor)
 #	assign		: Tests copy constructor and copy assignement operator
-#	assignLeaks	: Calls 'leaks' command using atexit(3) (Copy Constructo`r)
+#	assignLeaks	: Calls 'leaks' command using atexit(3) (Copy Constructor)
 #	assignBuild	: Shows messages of constructors and destructors (Copy Constructor)
 
 NAME = Interface
@@ -21,7 +22,7 @@ CXXFLAGS = -Wall -Werror -Wextra
 
 STD = -std=c++98
 
-DEPS_FLAGS = -MMD -MP
+DEPS_FLAGS = -MMD
 
 SRC 	=	main.cpp \
 			src/AMateria.cpp \
@@ -46,6 +47,8 @@ NC ='\033[0m'
 
 ifeq ($(BUILD), tests)
 	CXXFLAGS+=-DTESTS
+else ifeq ($(BUILD), testsLeaks)
+	CXXFLAGS+=-DTEST_LEAKS -DTESTS
 else ifeq ($(BUILD), leaks)
 	CXXFLAGS+=-DTEST_LEAKS
 else ifeq ($(BUILD), build)
@@ -54,7 +57,7 @@ else ifeq ($(BUILD), build)
 else ifeq ($(BUILD), assign)
 	CXXFLAGS+=-DASSIGN
 else ifeq ($(BUILD), assignLeaks)
-	CXXFLAGS+=-DASSIGN -`
+	CXXFLAGS+=-DASSIGN -DTEST_LEAKS
 else ifeq ($(BUILD), assignBuild)
 	CXXFLAGS+=-DASSIGN -DCONSTROCTURS_MSG -DSTOP_SIMULATION
 endif

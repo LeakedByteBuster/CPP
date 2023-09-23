@@ -111,10 +111,13 @@ Character::~Character()
 void    Character::equip(AMateria* mat)
 {
     /* Checking if inventory is full */
-    if (capacity > INVENTORY_CAPACITY)
+    if ((mat != NULL) && (capacity >= INVENTORY_CAPACITY)) {
+        delete mat;
         return ;
+    }
     /* looking for the first empty slot in inventory */
     int i = 0;
+
     while (i < INVENTORY_CAPACITY)
     {
         if (matEquipped[i] == NULL)
