@@ -13,7 +13,7 @@ public:
     ~Ice();
 
     AMateria*   clone() const;
-    void        use(ICharacter& target);
+    virtual void        use(ICharacter& target);
 };
 
 #endif // ICE_HPP

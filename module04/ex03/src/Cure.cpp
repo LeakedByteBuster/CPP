@@ -49,7 +49,8 @@ void    Cure::use(ICharacter &target)
 {
 
     #ifndef STOP_SIMULATION
-        std::cout << "* heals "<< target.getName() << "’s wound " << " *";
+        std::cout << "* heals "<< target.getName() << "'s wound " << " *"\
+            << std::endl;
     #else
         (void)target;
     #endif // STOP_SIMULATION

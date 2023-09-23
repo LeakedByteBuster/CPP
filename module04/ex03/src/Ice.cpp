@@ -49,7 +49,8 @@ AMateria*    Ice::clone() const
 void    Ice::use(ICharacter &target)
 {
     #if !defined(STOP_SIMULATION)
-        std::cout << "* shoots an ice bolt at " << target.getName() << " *";
+        std::cout << "* shoots an ice bolt at " << target.getName() << " *"\
+            << std::endl;
     #else
         (void)target;
     #endif // STOP_SIMULATION

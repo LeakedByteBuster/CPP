@@ -145,7 +145,7 @@ void    Character::use(int i, ICharacter& target)
 {
     /* Checking if the requested AMateria is equipped */
     if ((i >= 0 && i < INVENTORY_CAPACITY) && (matEquipped[i] != NULL)){
-            matEquipped[i]->AMateria::use(target);
+            matEquipped[i]->use(target);
     }
     return ;
 }

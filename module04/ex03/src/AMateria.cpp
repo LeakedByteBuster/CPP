@@ -54,5 +54,6 @@ std::string const & AMateria::getType() const
 
 void    AMateria::use(ICharacter&)
 {
+    std::cout << "???AMateria???" << std::endl;
     return ;
 }
