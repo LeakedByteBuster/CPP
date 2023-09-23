@@ -1,4 +1,19 @@
-# CPP
+# CPP / OOP
+## Contents
+  ## Theory
+  -  [Programming Paradigms](https://github.com/LeakedByteBuster/CPP#programming-paradigms)
+  -  [Notes]([https://github.com/LeakedByteBuster/CPP#programming-paradigms](https://github.com/LeakedByteBuster/CPP#notes))
+  ## Modules
+  -  [module00 : the specifities of the language when compared to C](https://github.com/LeakedByteBuster/CPP/tree/main/module00)
+  -  [module01 : memory allocation, reference, pointers to members and the usage of the switch](https://github.com/LeakedByteBuster/CPP/tree/main/module01)
+  -  [module02 : Ad-hoc polymorphism, overloads and orthodox canonical classes](https://github.com/LeakedByteBuster/CPP/tree/main/module02)
+  -  [module03 : Inheritance](https://github.com/LeakedByteBuster/CPP/tree/main/module03)
+  -  [module04 : Subtype polymorphism, abstract classes and interfaces](https://github.com/LeakedByteBuster/CPP/tree/main/module04)
+  -  [module05 : Try/Catch and Exceptions](https://github.com/LeakedByteBuster/CPP/tree/main/module05)
+  -  [module06 : the different casts in CPP](https://github.com/LeakedByteBuster/CPP/tree/main/module06)
+  -  [module07 : Templates](https://github.com/LeakedByteBuster/CPP/tree/main/module07)
+  -  [module08 : templated containers, iterators and algorithms](https://github.com/LeakedByteBuster/CPP/tree/main/module08)
+  -  [module09 : containers](https://github.com/LeakedByteBuster/CPP/tree/main/module09)
 
 ## Programming Paradigms
 
