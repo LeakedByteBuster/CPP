@@ -1,5 +1,4 @@
 #include "Character.hpp"
-#include "AMateria.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
 
@@ -31,14 +30,12 @@ static void initZero(AMateria **p)
 static void    deepCopy(Character &lhs , const Character &rhs)
 {
     /* Copying AMateria equipped */
-    const AMateria    **l = lhs.getMatEquipped();
-    const AMateria    **r = rhs.getMatEquipped();
+    AMateria            **l = lhs.getMatEquipped();
+    const AMateria      **r = (const AMateria **)rhs.getMatEquipped();
 
-    if (r != NULL){
-        for (int i = 0; i < INVENTORY_CAPACITY; i++){
-            if (r[i] != NULL)
-                l[i] = r[i]->clone();
-        }
+    for (int i = 0; i < INVENTORY_CAPACITY; i++){
+        if (r[i] != NULL)
+            l[i] = r[i]->clone();
     }
     return ;
 }
@@ -162,9 +159,9 @@ void    Character::setName(const std::string &name)
     return ;
 }
 
-AMateria const      Character::**getMatEquipped() const
+AMateria    **Character::getMatEquipped() const
 {
-    return (matEquipped);
+    return ((AMateria **)matEquipped);
 }
 
 std::string const & Character::getName() const

@@ -25,9 +25,10 @@ DEPS_FLAGS = -MMD -MP
 
 SRC 	=	main.cpp \
 			src/AMateria.cpp \
-			src/Character.cpp \
 			src/Cure.cpp \
-			src/Ice.cpp
+			src/Ice.cpp \
+			src/Character.cpp \
+			src/MateriaSource.cpp 
 
 OBJ_DIR = obj
 
