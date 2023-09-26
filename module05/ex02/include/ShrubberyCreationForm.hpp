@@ -13,7 +13,7 @@ public:
     ShrubberyCreationForm& operator=(const ShrubberyCreationForm &rhs);
     ~ShrubberyCreationForm();
 
-    void    drawTree(std::ofstream &ofs);
+    void    childAction(std::string target) const;
 };
 
 #endif // SHRUBBERYCREATIONFORM_HPP

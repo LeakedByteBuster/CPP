@@ -22,9 +22,11 @@ DEPS_FLAGS = -MMD
 SRC 	=	src/main.cpp \
 			src/Bureaucrat.cpp \
 			src/AForm.cpp \
+			src/RobotomyRequestForm.cpp \
 			src/ShrubberyCreationForm.cpp \
-			ExceptionClasses/GradeTooLowException.cpp \
-			ExceptionClasses/GradeTooHighException.cpp
+			exceptionClasses/GradeTooLowException.cpp \
+			exceptionClasses/GradeTooHighException.cpp \
+			exceptionClasses/FormNotSigned.cpp
 
 OBJ_DIR = obj
 
@@ -32,7 +34,7 @@ OBJS = $(patsubst %, $(OBJ_DIR)/%, $(SRC:.cpp=.o))
 
 DEPS = $(OBJS:%.o=%.d)
 
-INC_HEADERS = -I. -I./ExceptionClasses -I./include
+INC_HEADERS = -I. -I./exceptionClasses -I./include
 
 RM = rm -rf
 
@@ -60,7 +62,7 @@ $(OBJ_DIR)/%.o : %.cpp
 	@ printf $(NC)
 
 clean :
-	@ $(RM) $(OBJ_DIR)
+	@ $(RM) $(OBJ_DIR) *_shrubbery
 
 fclean : clean
 	@ $(RM) $(NAME)

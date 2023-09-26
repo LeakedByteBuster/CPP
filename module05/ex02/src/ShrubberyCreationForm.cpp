@@ -7,22 +7,17 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm()
         std::cout << "ShrubberyCreationForm default constructor is called\n";
     #endif // DEBUG
 
-    std::cout << "You didn't give a file to ShrubberyCreationForm" << std::endl;
+    std::cout << "You didn't give a file to ShrubberyCreationForm constructor" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) 
+    : AForm("ShrubberyCreationForm", 145, 137)
 {
     #if defined(DEBUG)
         std::cout << "ShrubberyCreationForm parameterized constructor is called\n";
     #endif // DEBUG
-
-    std::ofstream   ofs(target);
-    if (!ofs)
-    {
-        std::cerr << "Cannot open the file " << target << std::endl;
-        return ;
-    }
-    drawTree(ofs);
+    
+    setTarget(target);
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs) : AForm(rhs)
@@ -30,6 +25,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs) :
     #if defined(DEBUG)
         std::cout << "ShrubberyCreationForm copy constructor is called\n";
     #endif // DEBUG
+
+    setTarget(rhs.getTarget());
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs)
@@ -51,15 +48,23 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
     #endif // DEBUG
 }
 
-#define ROOT_WIDTH 5
+#define ROOT_WIDTH 5 /* This MACRO determines how much big the tree will be */
 
-void    ShrubberyCreationForm::drawTree(std::ofstream &ofs)
+void    ShrubberyCreationForm::childAction(std::string target) const
 {
+    /* Openning File */
+    std::ofstream   ofs(target + "_shrubbery");
+    if (!ofs)
+    {
+        ofs.close();
+        std::cerr << "Cannot open the file " << target << std::endl;
+        return ;
+    }
+    /* variables for drawing tree */
     const int   height = 50;
     const int   width = 100;
     const int   mid = 50;
     const int   heightLeaves = height / 1.1;
-    bool        moreLeavesR = 0;
     bool        moreLeavesL = 0;
 
     /* Draw body part */
@@ -86,9 +91,9 @@ void    ShrubberyCreationForm::drawTree(std::ofstream &ofs)
                     ofs << "/"; /* Puts background for right part*/
             #endif // TREE_BACKGROUND
         }
-        moreLeavesR = 0;
-        moreLeavesL = 0;
         x++;
+        moreLeavesL = 0;
         ofs << std::endl;
     }
+    ofs.close();
 }

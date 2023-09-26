@@ -1,13 +1,19 @@
 #if !defined(ROBOTOMYREQUESTFORM_HPP)
 #define ROBOTOMYREQUESTFORM_HPP
 
-class RobotomyRequestForm
-{
-private:
-    /* data */
+#include "AForm.hpp"
+
+//RobotomyRequestForm
+class RobotomyRequestForm : public AForm {
+
 public:
-    RobotomyRequestForm(/* args */);
+    RobotomyRequestForm();
+    RobotomyRequestForm(std::string target);
+    RobotomyRequestForm(const RobotomyRequestForm &rhs);
+    RobotomyRequestForm& operator=(const RobotomyRequestForm &rhs);
     ~RobotomyRequestForm();
+
+    void    childAction(std::string target) const;
 };
 
 #endif // ROBOTOMYREQUESTFORM_HPP

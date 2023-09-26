@@ -25,6 +25,8 @@ public:
     const std::string   getName() const;
     int                 getGrade() const;
     void                signForm(const AForm &form) const;
+
+    void                executeForm(AForm const & form) const;
 };
 
 std::ostream&   operator<<(std::ostream &, const Bureaucrat &);

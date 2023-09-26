@@ -2,6 +2,10 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
+/* -------------------------------------------------------------------------- */
+/*                                Constructors                                */
+/* -------------------------------------------------------------------------- */
+
 Bureaucrat::Bureaucrat() : name(""), grade(0)
 {
     #if defined(DEBUG)
@@ -52,6 +56,10 @@ Bureaucrat::~Bureaucrat()
     #endif  // DEBUG
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                  Methods                                   */
+/* -------------------------------------------------------------------------- */
+
 void            Bureaucrat::incrementGrade()
 {
     if ((grade - 1) <= HIGH_GRADE)
@@ -89,4 +97,14 @@ void                Bureaucrat::signForm(const AForm &form) const
         return ;
     }
     std::cout << name << " couldn't sign " << form.getName() << " because ";
+}
+
+void    Bureaucrat::executeForm(AForm const & form) const
+{
+    if (grade > form.getGradeRequiredToExecute())
+        std::cerr << name << " cannot execute the form " << form.getName() << std::endl;
+    else{
+        form.childAction(form.getTarget());
+        std::cout << name << " executed " << form.getName() << std::endl;
+    }
 }

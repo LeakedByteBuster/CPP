@@ -1,19 +1,19 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "FormNotSigned.hpp"
 
 /* -------------------------------------------------------------------------- */
 /*                                Constructors                                */
 /* -------------------------------------------------------------------------- */
 
-AForm::AForm() : name(""), isSigned(0), gradeRequiredToSign(1), 
-                gradeRequiredToExecute(1)
+AForm::AForm() : name(""), isSigned(0), gradeRequiredToSign(0), 
+                gradeRequiredToExecute(0)
 {
     #if defined(DEBUG)
         std::cout << "Form constructor is called" << std::endl;
     #endif  // DEBUG
 
-    // throw GradeTooHighException("Invalid arguments to constructor AForm::Form():"\
-    //                                " grades are equal to 0");
+    throw GradeTooHighException("Invalid arguments: grades of the executor are equal to 0");
 }
 
 AForm::AForm(const std::string name, const int gradeToSign, const int gradeToExecute) : name(name), 
@@ -66,6 +66,11 @@ const std::string     AForm::getName() const
     return (name);
 }
 
+std::string AForm::getTarget() const
+{
+    return (target);
+}
+
 bool            AForm::getIsSigned() const
 {
     return (isSigned);
@@ -79,6 +84,11 @@ int             AForm::getGradeRequiredToSign() const
 int             AForm::getGradeRequiredToExecute() const
 {
     return (gradeRequiredToExecute);
+}
+
+void    AForm::setTarget(std::string target)
+{
+    this->target = target;
 }
 
 std::ostream&    operator<<(std::ostream &os, const AForm &rhs)
@@ -103,4 +113,14 @@ void    AForm::beSigned(const Bureaucrat &sir)
 void    AForm::setIsSigned(bool value)
 {
     isSigned = value;
+}
+
+void    AForm::execute(Bureaucrat const &executor) const
+{
+    if (!isSigned)
+        throw   FormNotSigned( name + " Form is not signed");
+    if (executor.getGrade() > gradeRequiredToExecute)
+        throw   GradeTooLowException(executor.getName() + " doesn't have " 
+            "required grade to execute the following form " + name);
+    executor.executeForm(*this);
 }
