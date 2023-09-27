@@ -6,7 +6,7 @@
 /*                                Constructors                                */
 /* -------------------------------------------------------------------------- */
 
-Bureaucrat::Bureaucrat() : name(""), grade(0)
+Bureaucrat::Bureaucrat() : name("Unknown"), grade(0)
 {
     #if defined(DEBUG)
         std::cout << "Bureaucrat constructor is called" << std::endl;
@@ -101,7 +101,8 @@ void                Bureaucrat::signForm(const AForm &form) const
 
 void    Bureaucrat::executeForm(AForm const & form) const
 {
-    if (grade > form.getGradeRequiredToExecute())
+    if (grade > form.getGradeRequiredToExecute() || grade > form.getGradeRequiredToSign()
+            || !form.getIsSigned())
         std::cerr << name << " cannot execute the form " << form.getName() << std::endl;
     else{
         form.childAction(form.getTarget());

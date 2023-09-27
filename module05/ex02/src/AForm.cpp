@@ -29,7 +29,7 @@ AForm::AForm(const std::string name, const int gradeToSign, const int gradeToExe
         throw GradeTooLowException(name + " grade too low");
 }
 
-AForm::AForm(const AForm &rhs) : name(rhs.getName()), isSigned(rhs.getIsSigned()),
+AForm::AForm(const AForm &rhs) : name(rhs.getName()), target(rhs.getTarget()), isSigned(rhs.getIsSigned()),
         gradeRequiredToSign(rhs.getGradeRequiredToSign()), 
             gradeRequiredToExecute(rhs.getGradeRequiredToExecute())
 {
@@ -46,6 +46,7 @@ AForm& AForm::operator=(const AForm &rhs)
 
     if (this != &rhs){
         isSigned = rhs.getIsSigned();
+        target = rhs.getTarget();
     }
     return (*this);
 }
@@ -122,5 +123,6 @@ void    AForm::execute(Bureaucrat const &executor) const
     if (executor.getGrade() > gradeRequiredToExecute)
         throw   GradeTooLowException(executor.getName() + " doesn't have " 
             "required grade to execute the following form " + name);
+    
     executor.executeForm(*this);
 }

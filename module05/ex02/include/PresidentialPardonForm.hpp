@@ -4,12 +4,15 @@
 class   AForm;
 
 class PresidentialPardonForm : public AForm {
-private:
-    /* data */
 
 public:
-    PresidentialPardonForm(/* args */);
+    PresidentialPardonForm();
+    PresidentialPardonForm(std::string target);
+    PresidentialPardonForm(const PresidentialPardonForm &rhs);
+    PresidentialPardonForm& operator=(const PresidentialPardonForm &rhs);
     ~PresidentialPardonForm();
+
+    void    childAction(std::string target) const;
 };
 
 #endif // PRESIDENTIALPARDONFORM_HPP

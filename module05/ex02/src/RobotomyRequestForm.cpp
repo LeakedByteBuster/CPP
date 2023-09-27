@@ -36,6 +36,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 
     if (this != &rhs){
         setIsSigned(rhs.getIsSigned());
+        setTarget(rhs.getTarget());
     }
     return (*this);
 }

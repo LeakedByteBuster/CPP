@@ -24,6 +24,7 @@ SRC 	=	src/main.cpp \
 			src/AForm.cpp \
 			src/RobotomyRequestForm.cpp \
 			src/ShrubberyCreationForm.cpp \
+			src/PresidentialPardonForm.cpp \
 			exceptionClasses/GradeTooLowException.cpp \
 			exceptionClasses/GradeTooHighException.cpp \
 			exceptionClasses/FormNotSigned.cpp
@@ -46,6 +47,8 @@ ifeq ($(BUILD), background)
 	CXXFLAGS+=-DTREE_BACKGROUND
 else ifeq ($(BUILD), debug)
 	CXXFLAGS+=-DDEBUG
+else ifeq ($(BUILD), assign)
+	CXXFLAGS+=-DASSIGN
 endif
 
 all : $(NAME)
