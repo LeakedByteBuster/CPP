@@ -1,15 +1,16 @@
 #if !defined(UTILS_HPP)
 #define UTILS_HPP
 
-#include <string>
 
 enum INPUT_TYPES{
     UNKNOWN,
     CHAR,
     INT,
     FLOAT,
-    DOUBLE
+    DOUBLE,
+    NOTAN
 };
 
-int getInputType(std::string p);
+bool    isInputZero(char *p);
+int     inputType(char *p);
 #endif // UTILS_HPP

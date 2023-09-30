@@ -1,10 +1,8 @@
 #if !defined(SCALARCONVERTER_HPP)
 #define SCALARCONVERTER_HPP
 
-class ScalarConverter
-{
-private:
-    /* data */
+class ScalarConverter {
+
 public:
     ScalarConverter();
     ScalarConverter(const ScalarConverter &rhs);
