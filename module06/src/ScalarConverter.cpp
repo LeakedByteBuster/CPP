@@ -3,26 +3,17 @@
 #include "ScalarConverter.hpp"
 #include "utils.hpp"
 
-ScalarConverter::ScalarConverter()
+ScalarConverter::ScalarConverter(){}
+ScalarConverter::ScalarConverter(ScalarConverter &rhs)
 {
-
+    if (&rhs == this)
+        return ;
+    *this = rhs;
 }
+ScalarConverter& ScalarConverter::operator=(ScalarConverter &) {return (*this);}
+ScalarConverter::~ScalarConverter(){}
 
-ScalarConverter::ScalarConverter(ScalarConverter &)
-{
-
-}
-
-ScalarConverter& ScalarConverter::operator=(ScalarConverter &)
-{
-    return (*this);
-}
-
-ScalarConverter::~ScalarConverter()
-{
-
-}
-
+/* Used for better readability */
 #define CHECK_INFF input.find("inff") == std::string::npos
 #define CHECK_NANF input.find("nanf") == std::string::npos
 

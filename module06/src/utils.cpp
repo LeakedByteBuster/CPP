@@ -1,7 +1,9 @@
 #include <iostream>
 #include <iomanip>
 #include <cfloat>
+#include <limits>
 #include <climits>
+#include <cmath>
 #include <stdlib.h>
 
 static bool    checkChar(double c)
