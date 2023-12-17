@@ -1,3 +1,5 @@
+#include <cmath> // isnan(), isinf()
+#include <cstdlib> // strtod()
 #include "ScalarConverter.hpp"
 #include "utils.hpp"
 
@@ -21,6 +23,9 @@ ScalarConverter::~ScalarConverter()
 
 }
 
+#define CHECK_INFF input.find("inff") == std::string::npos
+#define CHECK_NANF input.find("nanf") == std::string::npos
+
 void    ScalarConverter::convert(std::string input)
 {
     // check if input is char
@@ -28,7 +33,7 @@ void    ScalarConverter::convert(std::string input)
         convertToChar(*input.data());
         return ;
     }
-    // check if input is valid
+    // check if a conversion is possible
     char    *endptr;
     double  res = strtod(input.data(), &endptr);
     if (input.data() == endptr){
@@ -36,17 +41,14 @@ void    ScalarConverter::convert(std::string input)
             "float : impossible\n" << "double : impossible\n";
         return ;
     }
-
-    if (input.find('.') != std::string::npos || res == INFINITY || res == -INFINITY || res != res){
-        // check if input is double
-        if (input.find('f') == std::string::npos && (res != INFINITY || res != -INFINITY)){
-            convertToDouble(res);
+    // check if input is double or float
+    if (input.find('.') != std::string::npos || isinf(res) || isnan(res)){
+        if (((isinf(res) && CHECK_INFF) || (isnan(res) && CHECK_NANF)) || 
+            ((input.find('f') == std::string::npos) && CHECK_NANF && CHECK_INFF)){
+            convertToDouble(input);
             return ;
         }
-        // if (res == INFINITY || res == -INFINITY || res != res){
-            convertToFloat(input);
-            // return ;
-        // }
+        convertToFloat(input);
     }
     // check if input is int
     else if (isdigit(*input.data()) || atoi(input.data())){

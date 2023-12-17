@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <cfloat>
+#include <climits>
+#include <stdlib.h>
 
 static bool    checkChar(double c)
 {
@@ -23,22 +25,19 @@ static bool    checkInt(double i)
     return (0);
 }
 
-// static bool checkFloat(double f)
-// {
-//     if (f <= FLT_MAX && f >= FLT_MIN)
-//         return (1);
-//     return (0);
-// }
-
-// static bool checkDouble(double f)
-// {
-//     if (f <= DBL_MAX && f >= DBL_MIN )
-//         return (1);
-//     return (0);
-// }
+static bool checkFloat(double f)
+{
+    if ((f <= FLT_MAX && f >= FLT_MIN) || isinf(f) || isnan(f))
+        return (1);
+    std::cout << "float : impossible\n";
+    return (0);
+}
 
 void    convertToChar(char c)
 {
+    #if defined(CHECK)
+        std::cout << "convertToChar called\n";
+    #endif // CHECK
     std::cout << "char : " << c << "\n";
     std::cout << "int : " << static_cast<int>(c) << "\n";
     std::cout << std::fixed;
@@ -51,7 +50,7 @@ void    convertToChar(char c)
 void    convertToInt(std::string input)
 {
     #if defined(CHECK)
-        std::cout << "convertToInt called\n"
+        std::cout << "convertToInt called\n";
     #endif // CHECK
 
     char    *endptr;
@@ -74,14 +73,12 @@ void    convertToInt(std::string input)
 void    convertToFloat(std::string input)
 {
     #if defined(CHECK)
-        std::cout << "convertToFloat called\n"
+        std::cout << "convertToFloat called\n";
     #endif // CHECK
     char    *endptr;
     double    res = strtod(input.data(), &endptr);
 
-    if ((res <= FLT_MAX && res >= FLT_MIN) || res == INFINITY || res != res ||
-        res == -INFINITY){
-            endptr = NULL;
+    if ((res <= FLT_MAX && res >= FLT_MIN) || isinf(res) || isnan(res)){
             float   f = strtof(input.data(), &endptr);
             if (checkChar(f))
                 std::cout << "char : " << static_cast<char>(f) << "\n";
@@ -97,8 +94,30 @@ void    convertToFloat(std::string input)
     }
 }
 
-void    convertToDouble(double d)
+void    convertToDouble(std::string input)
 {
-    // checkFloat(d);
-    std::cout << "double : " << d << "\n";
+    char    *endptr;
+    long double    d = strtold(input.data(), &endptr);
+    #if defined(CHECK)
+        std::cout << "convertToDouble called\n";
+    #endif // CHECK
+    if ((d >= std::numeric_limits<double>::min() 
+        && d <= std::numeric_limits<double>::max()) || isinf(d) || isnan(d)){
+            d = strtod(input.data(), &endptr);
+            if (checkChar(d))
+                std::cout << "char : " << static_cast<char>(d) << "\n";
+            if (checkInt(d))
+                std::cout << "int : " << static_cast<int>(d) << "\n";
+            std::cout << std::fixed;
+            if (checkFloat(d)){
+                if (isnan(d) || isinf(d))
+                    std::cout << std::setprecision(1) << "float : " << static_cast<float>(d) << "f\n";
+                else
+                    std::cout << std::setprecision(1) << "float : " << static_cast<float>(d) << "\n";
+            }
+            std::cout << std::setprecision(1) << "double : " << d << "\n";
+    }
+    else {
+        std::cout << "Warning : conversion from double makes no sense\n";
+    }
 }

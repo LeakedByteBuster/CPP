@@ -22,6 +22,12 @@ HRED = "\e[1;91m"
 HWHT = "\e[1;97m"
 NC ='\033[0m'
 
+ifeq ($(BUILD), check)
+	CXXFLAGS += -DCHECK
+endif
+# e:
+# 	@echo $(CXXFLAGS)
+
 all : $(NAME)
 
 $(NAME) : $(OBJ)
