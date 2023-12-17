@@ -37,9 +37,6 @@ static bool checkFloat(double f)
 
 void    convertToChar(char c)
 {
-    #if defined(CHECK)
-        std::cout << "convertToChar called\n";
-    #endif // CHECK
     std::cout << "char : " << c << "\n";
     std::cout << "int : " << static_cast<int>(c) << "\n";
     std::cout << std::fixed;
@@ -51,10 +48,6 @@ void    convertToChar(char c)
 
 void    convertToInt(std::string input)
 {
-    #if defined(CHECK)
-        std::cout << "convertToInt called\n";
-    #endif // CHECK
-
     char    *endptr;
     double    res = strtod(input.data(), &endptr);
 
@@ -74,9 +67,6 @@ void    convertToInt(std::string input)
 
 void    convertToFloat(std::string input)
 {
-    #if defined(CHECK)
-        std::cout << "convertToFloat called\n";
-    #endif // CHECK
     char    *endptr;
     double    res = strtod(input.data(), &endptr);
 
@@ -100,9 +90,7 @@ void    convertToDouble(std::string input)
 {
     char    *endptr;
     long double    d = strtold(input.data(), &endptr);
-    #if defined(CHECK)
-        std::cout << "convertToDouble called\n";
-    #endif // CHECK
+
     if ((d >= std::numeric_limits<double>::min() 
         && d <= std::numeric_limits<double>::max()) || isinf(d) || isnan(d)){
             d = strtod(input.data(), &endptr);
