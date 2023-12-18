@@ -11,12 +11,15 @@
 
 int main()
 {
+
     Data    p;
+    uintptr_t   serial = 0;
 
     p.c = '1';
     p.i = 1;
-    std::cout << " Original State : char = " << p.c << " | int  = " << p.i << "\n";
-    uintptr_t   serial = Serializer::serialize(&p);
+    std::cout << " Original State : char = " << p.c << " | int  = " << p.i << \
+        " | serial = " << serial << "\n";
+    serial = Serializer::serialize(&p);
     std::cout << " After Serialization : " << serial << "\n";
     Data        *deserial = Serializer::deserialize(serial);
     std::cout << " After Deserialization : char = " << deserial->c << " | int  = " << deserial->i << "\n";
