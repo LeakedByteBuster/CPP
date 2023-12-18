@@ -48,6 +48,9 @@ Diamond
 zoo
 Interface
 Bureaucrat
+converter
+serializer
+identify
 
 # Test Files
 foo.*
@@ -56,3 +59,4 @@ test.*
 # Others
 .vscode
 Lab
+.editorconfig
