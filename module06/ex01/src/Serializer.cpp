@@ -1,8 +1,18 @@
 #include "Serializer.hpp"
 
 Serializer::Serializer(){}
-Serializer::Serializer(Serializer &){}
-Serializer& Serializer::operator=(Serializer &){return (*this);}
+Serializer::Serializer(Serializer &rhs)
+{
+    *this = rhs;
+}
+
+Serializer& Serializer::operator=(Serializer &rhs)
+{
+    if (this == &rhs)
+        return (*this);
+    return (*this);
+}
+
 Serializer::~Serializer(){}
 
 uintptr_t    Serializer::serialize(Data* ptr)
