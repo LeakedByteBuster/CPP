@@ -5,8 +5,10 @@
 #include "Data.hpp"
 
 class Serializer {
-public :
+private :
     Serializer();
+
+public :
     Serializer(Serializer &);
     Serializer& operator=(Serializer &);
     virtual ~Serializer() = 0;

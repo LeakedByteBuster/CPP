@@ -7,11 +7,12 @@
 class ScalarConverter {
 private :
     ScalarConverter();
-    ScalarConverter(ScalarConverter &rhs);
-    ScalarConverter&    operator=(ScalarConverter &rhs);
-    virtual ~ScalarConverter() = 0;
 
 public:
+    ScalarConverter(ScalarConverter &rhs);
+    ScalarConverter&    operator=(ScalarConverter &rhs);
+    ~ScalarConverter();
+
     static void convert(std::string input);
 };
 
