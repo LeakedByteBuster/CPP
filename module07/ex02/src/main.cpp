@@ -40,8 +40,12 @@ int main(void) {
         #elif CHAR
             b[i] = 'a';
         #else
-            b[i] = i;
-        #endif // STRING
+            #if OUT_RANGE
+                b[100] = 'a';
+            #else
+                b[i] = i;
+            #endif // OUT_RANGE
+        #endif // STRING, CHAR, INT
     }
 
     #if CHAR

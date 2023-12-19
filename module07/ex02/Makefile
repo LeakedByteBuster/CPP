@@ -30,6 +30,8 @@ else ifeq ($(build), string)
 	CXXFLAGS += -DSTRING
 else ifeq ($(build), char)
 	CXXFLAGS += -DCHAR
+else ifeq ($(build), out)
+	CXXFLAGS += -DOUT_RANGE
 endif
 
 all : $(NAME)
