@@ -1,7 +1,4 @@
 #include <stdexcept>
-#include <limits.h> // INT_MAX
-#include <time.h> 
-#include <stdlib.h>
 #include "Span.hpp"
 
 
@@ -93,16 +90,12 @@ void  Span::printSet() const
     std::cout << "\n";
 }
 
-
-void    Span::fillSet(const unsigned long n)
+void    Span::fillSet(std::multiset<int>::iterator it,
+    std::multiset<int>::iterator ite, size_t n)
 {
     try {
         if (n <= (toStore - set.size())) {
-            srand(time(NULL));
-            std::multiset<int>::iterator    it;
-            for (unsigned long i = 0; i < n; i++){
-                set.insert(rand() % INT_MAX);
-            }
+            set.insert(it, ite);
             return ;
         }
         throw std::invalid_argument("Error : not enough space");
