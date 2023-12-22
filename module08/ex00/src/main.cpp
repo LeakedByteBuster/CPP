@@ -14,7 +14,7 @@ int main()
     easyfind(arr, 1);
 
     std::vector<int>    ar(10);
-    for(int i = 0; static_cast<__SIZE_TYPE__>(i) < ar.size(); i++){
+    for(int i = 0; static_cast<size_t>(i) < ar.size(); i++){
         ar[i] = i;
         std::cout << ' ' << ar[i];
     }
