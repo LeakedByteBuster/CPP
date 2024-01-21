@@ -1,95 +1,65 @@
-#include <iostream>
 #include <sstream>
-#include <algorithm>
 #include "BitcoinExchange.hpp"
 
-static bool isStringDigit(std::string str, size_t size)
+BitcoinExchange::BitcoinExchange()
 {
-    size_t i = 0;
-    for (; i < size; i++)
-        if (!std::isdigit(str[i]))
-            break;
-    return (i == size ? 1 : 0);
+
 }
 
-static bool isDateCorrect(std::string &s, std::string &sub)
-{
-    // std::cout << sub << std::endl;
-    /* parse year */
-    size_t  pos = sub.find('-');
-    std::string year = sub.substr(0, pos);
-    if (year.size() != 4 || !isStringDigit(year, 4) || (pos == std::string::npos)) {
-        std::cout << "Error : bad input ==> " + s << std::endl;
-        return (0);
+BitcoinExchange::BitcoinExchange(std::string in)
+{   
+    dataFile.open(DATA_FILE);
+    if (!dataFile.is_open()) {
+        throw std::invalid_argument("Error: invalid database file");
     }
-    
-    /* parse month */
-    size_t  pos2 = sub.find('-', pos +1);
-    std::string month = sub.substr(pos + 1, (pos2 - 1 - pos));
-    if (month.size() != 2 || !isStringDigit(month, 2) || (pos == std::string::npos)) {
-        std::cout << "Error : bad input ==> " + s << std::endl;
-        return (0);
+    inputFile.open(in);
+    if (!inputFile.is_open()) {
+        throw std::invalid_argument("Error: invalid input file");
     }
 
-    /* parse day */
-    size_t  pos3 = sub.find(' ', pos2 + 1);
-    std::string date = sub.substr(pos2 + 1, pos3 - pos2);
-    if ((date.size() != 3) || !isStringDigit(date, 2) || (pos == std::string::npos)) {
-        std::cout << "Error : bad input ==> " + s << std::endl;
-        return (0);
-    }
+    std::string token;
+    std::string prev;
+    std::string line;
 
-    return (0);
-}
+    //  Skip first line
+    std::getline(dataFile, line, '\n');
 
-static bool isValueCorrect(std::string &s, std::string &sub)
-{
-    std::cout << "sub == " << sub << std::endl;
-    size_t n = std::count(sub.begin(), sub.end(), '.');
-    // size_t n2 = std::count(sub.begin(), sub.end(), ' ');
-    // size_t n3 = std::count(sub.begin(), sub.end(), '.');
-    if ((n > 1) || (sub[0] != ' ')) {
-        std::cout << "Error : bad input ==> " + s << std::endl;
-        return (0);
-    }
-
-    char    *endptr;
-    double  d = strtod(sub.data(), &endptr);
-    (void)d;
-    if (endptr == sub.data()){
-        std::cout << "Error : bad input ==> " + s << std::endl;
-    }
-    return (0);
-}
-
-
-bool    checkSyntax(std::string &s)
-{
-    /* Check numbers of '|' and space ' ' */
-    size_t  n = std::count(s.begin(), s.end(), '|');
-    size_t n2 = std::count(s.begin(), s.end(), ' ');
-    if ((n != 1) || (n2 != 2)) {
-        std::cout << "Error : bad input '|' or '-' ==> " + s << std::endl;
-    } else {
-        size_t  pos = s.find('|');
-        std::string date = s.substr(0, pos);
-        /* Check numbers of '-' in substring "date"*/
-        n = std::count(date.begin(), date.end(), '-');
-        if (n != 2){
-            std::cout << "Error : bad input ' ' ==> " + s << std::endl;
-            return (0);
+    while (std::getline(dataFile, line)) {
+        std::stringstream   ss(line);
+        for (int i = 0; std::getline(ss, token, ','); i++) {
+            if (i == 1) {
+                db.insert(std::make_pair(prev, std::strtod(token.data(), NULL)));
+            }
+            prev = token;
         }
-        /* Check date format */
-        isDateCorrect(s, date);
-
-        std::string value = s.substr(pos +1, std::string::npos);
-        // std::cout << "value == " << value << std::endl;
-        isValueCorrect(s, value);
     }
-    return (0);
 }
 
-void    storeInput()
+BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange )
 {
+    return (*this);
+}
 
+BitcoinExchange::~BitcoinExchange()
+{
+    
+}
+
+std::ostream&  operator<<(std::ostream &os, const BitcoinExchange &b)
+{
+    DataBase::const_iterator  it = b.getDb().begin();
+    for (; it != b.getDb().end(); it++) {
+
+        os << it->first << " ";
+        os << it->second << "\n";
+    }
+    return (os);
+}
+
+const DataBase &   BitcoinExchange::getDb() const {
+    return (this->db);
+}
+
+inline DataBase&      BitcoinExchange::setDb() {
+    return (this->db);
 }
