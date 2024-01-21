@@ -26,13 +26,17 @@ BitcoinExchange::BitcoinExchange(std::string in)
 
     while (std::getline(dataFile, line)) {
         std::stringstream   ss(line);
-        for (int i = 0; std::getline(ss, token, ','); i++) {
-            if (i == 1) {
-                db.insert(std::make_pair(prev, std::strtod(token.data(), NULL)));
+        if (!line.empty()) {
+            for (int i = 0; std::getline(ss, token, ','); i++) {
+                if (i == 1) {
+                    db.insert(std::make_pair(prev, std::strtod(token.data(), NULL)));
+                }
+                prev = token;
             }
-            prev = token;
         }
     }
+    if (db.size() == 0)
+        throw std::invalid_argument("Error: empty data map");
 }
 
 BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange )
@@ -42,7 +46,10 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange )
 
 BitcoinExchange::~BitcoinExchange()
 {
-    
+    if (inputFile.is_open())
+        inputFile.close();
+    if (dataFile.is_open())
+        dataFile.close();
 }
 
 std::ostream&  operator<<(std::ostream &os, const BitcoinExchange &b)
@@ -60,6 +67,62 @@ const DataBase &   BitcoinExchange::getDb() const {
     return (this->db);
 }
 
-inline DataBase&      BitcoinExchange::setDb() {
+DataBase&      BitcoinExchange::setDb() {
     return (this->db);
+}
+
+void    BitcoinExchange::readInputFile()
+{
+    std::string line;
+    std::getline(inputFile, line);
+    if (line.compare("date | value"))
+        std::cout <<  BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
+    while (std::getline(inputFile, line)) {
+
+        size_t  n = std::count(line.begin(), line.end(), '|');
+        size_t n2 = std::count(line.begin(), line.end(), ' ');
+        if ((n != 1) || (n2 != 2)) {
+            std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
+            continue ;
+        }
+
+        size_t  pos = line.find('|');
+        std::string date = line.substr(0, pos);
+        std::string value = line.substr(pos +1, std::string::npos);
+
+        /* Check numbers of '-' in substring "date"*/
+        n = std::count(date.begin(), date.end(), '-');
+        if (n != 2 || !isDateCorrect(date) ){
+            std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
+            continue ;
+        }
+
+        std::cout << line << std::endl;
+        //if (isDateCorrect(s, date) && isValueCorrect(line, value)) {
+            // printRateExchange
+        // }
+        // 
+    }
+    return ;
+}
+
+std::string BitcoinExchange::getError(std::string e, int type)
+{
+    std::string s;
+
+    switch (type)
+    {
+    case TOO_LARGE_NUMBER:
+        s = "Error: too large a number.";
+        break;
+    
+    case BAD_INPUT:
+        s = "Error: bad input ➤ " + e;
+        break;
+
+    case NOT_A_POSITIVE:
+        s = "Error: not a positive number.";
+        break;
+    }
+    return (s);
 }
