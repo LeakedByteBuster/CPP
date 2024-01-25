@@ -51,6 +51,7 @@ Bureaucrat
 converter
 serializer
 identify
+btc
 
 # Test Files
 foo.*
