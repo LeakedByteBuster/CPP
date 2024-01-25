@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iomanip>      // std::setprecision
 #include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange()
@@ -97,11 +98,19 @@ void    BitcoinExchange::readInputFile()
         }
         
         std::string value = line.substr(pos +1, line.size());
-        if (!isValueCorrect(value, line)) {
+        if (!isValueCorrect(value)) {
             continue ;
         }
 
-        std::cout << line << std::endl;
+        DataBase::iterator  it = db.lower_bound(date);
+        if (it != db.begin()) {
+            it--;
+        }
+        std::cout   << std::fixed << std::setprecision(2) << date << " ==> " << value << " = " 
+                    << it->second * std::strtod(value.data(), NULL) 
+                    << std::endl;
+
+        std::cout << "lower : " << it->first << std::endl;
         // 
     }
     return ;
@@ -118,7 +127,7 @@ std::string BitcoinExchange::getError(std::string e, int type)
         break;
     
     case BAD_INPUT:
-        s = "Error: bad input ➤ " + e;
+        s = "Error: bad input ➤  " + e;
         break;
 
     case NOT_A_POSITIVE:

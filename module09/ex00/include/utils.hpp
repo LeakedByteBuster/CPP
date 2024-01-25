@@ -2,6 +2,6 @@
 #define UTILS_HPP
 
 bool    isDateCorrect(std::string &sub);
-bool    isValueCorrect(std::string &sub, std::string line);
+bool    isValueCorrect(std::string &sub);
 
 #endif // UTILS_HPP

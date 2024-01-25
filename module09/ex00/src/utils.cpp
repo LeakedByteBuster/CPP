@@ -24,7 +24,7 @@ static bool checkRange(std::string str, int type)
     switch (type)
     {
     case YEAR:
-        ret = (((d > 2009) && (d < 2022)) ? 1 : 0);
+        ret = (((d > 2008) && (d < 2023)) ? 1 : 0);
         break;
 
     case MONTH:
@@ -32,7 +32,7 @@ static bool checkRange(std::string str, int type)
         break;
 
     case DAY:
-        ret = (((d > 0) && (d < 31)) ? 1 : 0);
+        ret = (((d > 0) && (d < 32)) ? 1 : 0);
         break;
 
     default:
@@ -102,21 +102,21 @@ bool    isDateCorrect(std::string &sub)
     return (checkDateExistence(year, month, day));
 }
 
-bool    isValueCorrect(std::string &sub, std::string line)
+bool    isValueCorrect(std::string &sub)
 {
     char    *endptr = NULL;
 
     double d = std::strtod(sub.data(), &endptr);
     if (*endptr != '\0') {
-        std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
+        std::cout << BitcoinExchange::getError("", BAD_INPUT) << std::endl;
         return (0);
     }
     if (d < 0) {
-        std::cout << BitcoinExchange::getError(line, NOT_A_POSITIVE) << std::endl;
+        std::cout << BitcoinExchange::getError("", NOT_A_POSITIVE) << std::endl;
         return (0);
     }
     if (d > 100) {
-        std::cout << BitcoinExchange::getError(line, TOO_LARGE_NUMBER) << std::endl;
+        std::cout << BitcoinExchange::getError("", TOO_LARGE_NUMBER) << std::endl;
         return (0);
     }
     return (1);
