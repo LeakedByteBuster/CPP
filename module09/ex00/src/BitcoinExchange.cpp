@@ -6,7 +6,7 @@ BitcoinExchange::BitcoinExchange()
 
 }
 
-BitcoinExchange::BitcoinExchange(std::string in)
+BitcoinExchange::BitcoinExchange(const char *in)
 {   
     dataFile.open(DATA_FILE);
     if (!dataFile.is_open()) {
@@ -88,7 +88,6 @@ void    BitcoinExchange::readInputFile()
 
         size_t  pos = line.find('|');
         std::string date = line.substr(0, pos);
-        std::string value = line.substr(pos +1, std::string::npos);
 
         /* Check numbers of '-' in substring "date"*/
         n = std::count(date.begin(), date.end(), '-');
@@ -96,11 +95,13 @@ void    BitcoinExchange::readInputFile()
             std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
             continue ;
         }
+        
+        std::string value = line.substr(pos +1, line.size());
+        if (!isValueCorrect(value, line)) {
+            continue ;
+        }
 
         std::cout << line << std::endl;
-        //if (isDateCorrect(s, date) && isValueCorrect(line, value)) {
-            // printRateExchange
-        // }
         // 
     }
     return ;

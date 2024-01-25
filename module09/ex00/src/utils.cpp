@@ -41,12 +41,43 @@ static bool checkRange(std::string str, int type)
     return (ret);
 }
 
+bool    isLeapYear(int year)
+{ 
+// The year must be evenly divisible by 4;
+// If the year can also be evenly divided by 100, it is not a leap year;
+// unless...
+// The year is also evenly divisible by 400. Then it is a leap year.
+
+    int ret = ((year % 4) == 0) ? 1 : 0;
+    if (ret && (year % 100) == 0) {
+        ret = ((year % 400) == 0) ? 1 : 0;
+    }
+    return (ret);
+    
+}
+
+bool    checkDateExistence(const std::string &year, const std::string &month,
+            const std::string &day)
+{
+    int y = std::atoi(year.data());
+    int m = std::atoi(month.data());
+    int d = std::atoi(day.data());
+
+    if ((m == 2) && d > 28) {
+        if (!isLeapYear(y) || d > 29) { return (0); }
+    }
+    if ((m % 2) == 0) {
+        if (m != 8 && d > 30) { return (0); }
+    }
+    return (1);
+}
+
 bool    isDateCorrect(std::string &sub)
 {
     /* parse year */
     size_t  pos = sub.find('-');
     std::string year = sub.substr(0, pos);
-    if (!isStringDigit(year, 4) || (pos == std::string::npos)
+    if ((pos == std::string::npos) || !isStringDigit(year, 4) 
         || !checkRange(year, YEAR)) {
         return (0);
     }
@@ -62,24 +93,32 @@ bool    isDateCorrect(std::string &sub)
 
     /* parse day */
     size_t  pos3 = sub.find(' ', pos2 + 1);
-    std::string date = sub.substr(pos2 + 1, pos3 - pos2 - 1);
-    if (!isStringDigit(date, 2) || (pos == std::string::npos)
-            || !checkRange(date, DAY)) {
+    std::string day = sub.substr(pos2 + 1, pos3 - pos2 - 1);
+    if (!isStringDigit(day, 2) || (pos == std::string::npos)
+            || !checkRange(day, DAY)) {
         return (0);
     }
 
-    return (1);
+    return (checkDateExistence(year, month, day));
 }
 
-bool    isValueCorrect(std::string &sub)
+bool    isValueCorrect(std::string &sub, std::string line)
 {
     char    *endptr = NULL;
 
     double d = std::strtod(sub.data(), &endptr);
-    (void)d;
     if (*endptr != '\0') {
+        std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
         return (0);
     }
-    
+    if (d < 0) {
+        std::cout << BitcoinExchange::getError(line, NOT_A_POSITIVE) << std::endl;
+        return (0);
+    }
+    if (d > 100) {
+        std::cout << BitcoinExchange::getError(line, TOO_LARGE_NUMBER) << std::endl;
+        return (0);
+    }
     return (1);
 }
+

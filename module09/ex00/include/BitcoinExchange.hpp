@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include <map>
 #include <utility>
 #include <exception>
+#include <cstdlib>
 #include "utils.hpp"
 
-#define DATA_FILE "/Users/mfouadi/Desktop/42Cursus/CPP/module09/ex00/cpp_09/data.csv"
+#define DATA_FILE "/home/jeffrey/cppModules/module09/ex00/cpp_09/data.csv"
 
 typedef std::map<std::string, double> DataBase;
 
@@ -25,7 +27,7 @@ public :
     std::ifstream   inputFile;
 
     BitcoinExchange();
-    BitcoinExchange(std::string input);
+    BitcoinExchange(const char *in);
     BitcoinExchange &operator=(BitcoinExchange rhs);
     ~BitcoinExchange();
 
