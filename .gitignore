@@ -52,6 +52,7 @@ converter
 serializer
 identify
 btc
+RPN
 
 # Test Files
 foo.*
