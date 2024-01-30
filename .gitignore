@@ -53,6 +53,7 @@ serializer
 identify
 btc
 RPN
+PmergeMe
 
 # Test Files
 foo.*
