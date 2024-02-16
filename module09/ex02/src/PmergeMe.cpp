@@ -3,6 +3,8 @@
 static void    fillNumbersInSeq(std::vector<std::pair<int, int> > &dst, const std::vector<int> &src);
 static void    checkDuplicate(const std::vector<int> &lst, const int &odd, const bool &isOdd);
 
+
+// 61 49 79 73 41 26 6 82 17 64 95 29 54 21 78 40 96 44 87 93 81 16 90 37 3 34 47 97 67 59 48 98 88 33 31 42 58 10 23 86 11 74 24 75 66 14 83 46 100 71 53 13 4 55 18 92 80 28 43 76 45 94 7 60 9 91 77 2 38 99 25 12 70 39 89 57 20 1 8 52 35 51 72 56 84 68 32 62 65 27 30 15 36 
 /* -------------------------------------------------------------------------- */
 /*                                Constructors                                */
 /* -------------------------------------------------------------------------- */
@@ -55,7 +57,26 @@ void    PmergeMe::fillMainAndPendChain()
 
 void    PmergeMe::insertPendIntoMain()
 {
-    
+    if (pendChain.empty())
+        return ;
+    std::vector<size_t> jacobSeq = generateJacobsthalSeq(pendChain.size());
+    mainChain.insert(mainChain.begin(), pendChain[0]);
+
+    std::vector<int>::iterator  it;
+    size_t                      prevJacob = 0;
+    size_t                      toInsert = 0;
+
+    for (size_t i = 0; ; i++) {
+        prevJacob = jacobSeq[i];
+        size_t nextJacob = ((i + 1) < jacobSeq.size()) ? jacobSeq[i + 1] : pendChain.size() - 1;
+        for (; nextJacob > prevJacob; nextJacob--) {
+            toInsert = pendChain[nextJacob];
+            it = std::upper_bound(mainChain.begin(), mainChain.end(), toInsert);
+            mainChain.insert(it, toInsert);
+        }
+        if ((i + 1) >= jacobSeq.size())
+            break;
+    }
 }
 
 void    PmergeMe::swapElementInSeq()
@@ -68,8 +89,6 @@ void    PmergeMe::swapElementInSeq()
             seq[i].second = tmp;
         }
     }
-    generateJacobsthalSeq(3000);
-    
 }
 
 /* -------------------------------------------------------------------------- */
@@ -100,9 +119,8 @@ std::vector<size_t>    generateJacobsthalSeq(size_t n)
             }
             break;
         }
-        s.push_back(vecLen); // size of input will be the last element in the sequence
+        s.push_back(vecLen - 1); // size of input will be the last element in the sequence
     }
-    printLog(s, "jacob:");
 
     return (s);
 }
