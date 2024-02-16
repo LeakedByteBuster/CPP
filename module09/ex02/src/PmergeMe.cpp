@@ -68,7 +68,7 @@ void    PmergeMe::swapElementInSeq()
             seq[i].second = tmp;
         }
     }
-    generateJacobsthalSeq(2);
+    generateJacobsthalSeq(3000);
     
 }
 
@@ -80,7 +80,8 @@ void    PmergeMe::swapElementInSeq()
 std::vector<size_t>    generateJacobsthalSeq(size_t n)
 {
     std::vector<size_t>     s;
-    size_t                  len = n;
+    size_t                  vecLen = n;
+    size_t                  JacobNum = 0;
     
     if (n == 0)
         s.push_back(0);
@@ -91,12 +92,15 @@ std::vector<size_t>    generateJacobsthalSeq(size_t n)
         s.push_back(1);
         n -= 2;
         for (size_t i = 1; n > 1; i++) {
-            if (i < len) {
-                s.push_back(s[i] + (2 * s[i - 1]));
+            JacobNum = s[i] + (2 * s[i - 1]);
+            if (JacobNum < vecLen) {
+                s.push_back(JacobNum);
+                n--;
+                continue ;
             }
-            n--;
+            break;
         }
-        s.push_back(len); // size of input will be the last element in the sequence
+        s.push_back(vecLen); // size of input will be the last element in the sequence
     }
     printLog(s, "jacob:");
 
