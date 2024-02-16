@@ -168,6 +168,6 @@ std::ostream&   operator<<(std::ostream &os, const PmergeMe &s)
         os << " " << s.seq[i].first << " " << s.seq[i].second;
     }
     if (s.isOdd)
-        os << " | odd = " << s.oddNum;
+        os << " " << s.oddNum;
     return (os);
 }
