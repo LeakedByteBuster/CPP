@@ -3,6 +3,9 @@
 static void    fillNumbersInSeq(std::vector<std::pair<int, int> > &dst, const std::vector<int> &src);
 static void    checkDuplicate(const std::vector<int> &lst, const int &odd, const bool &isOdd);
 
+/* -------------------------------------------------------------------------- */
+/*                                Constructors                                */
+/* -------------------------------------------------------------------------- */
 PmergeMe::PmergeMe(const char **av) : isOdd(0), oddNum(0)
 {
 
@@ -23,16 +26,9 @@ PmergeMe::PmergeMe(const char **av) : isOdd(0), oddNum(0)
 
 PmergeMe::~PmergeMe() { }
 
-std::ostream&   operator<<(std::ostream &os, const PmergeMe &s)
-{
-    os << "Initial List:";
-    for (size_t i = 0; i < s.seq.size(); i++) {
-        os << " " << s.seq[i].first << " " << s.seq[i].second;
-    }
-    if (s.isOdd)
-        os << " | odd = " << s.oddNum;
-    return (os);
-}
+/* -------------------------------------------------------------------------- */
+/*                              Member Functions                              */
+/* -------------------------------------------------------------------------- */
 
 int     PmergeMe::strToInt(const char *av)
 {
@@ -44,6 +40,67 @@ int     PmergeMe::strToInt(const char *av)
         throw std::invalid_argument("Error: invalid input: " + static_cast<std::string>(av));
 
     return (res);
+}
+
+void    PmergeMe::fillMainAndPendChain()
+{
+    for (size_t i = 0; i < seq.size(); i++) {
+        mainChain.push_back(seq[i].first);
+        pendChain.push_back(seq[i].second);
+    }
+    if (isOdd) {
+        pendChain.push_back(oddNum);
+    }
+}
+
+void    PmergeMe::insertPendIntoMain()
+{
+    
+}
+
+void    PmergeMe::swapElementInSeq()
+{
+    int tmp  = 0;
+    for (size_t i = 0; i < seq.size(); i++) {
+        if (seq[i].first < seq[i].second) {
+            tmp  = seq[i].first;
+            seq[i].first = seq[i].second;
+            seq[i].second = tmp;
+        }
+    }
+    generateJacobsthalSeq(2);
+    
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              Utils Functions                               */
+/* -------------------------------------------------------------------------- */
+
+
+std::vector<size_t>    generateJacobsthalSeq(size_t n)
+{
+    std::vector<size_t>     s;
+    size_t                  len = n;
+    
+    if (n == 0)
+        s.push_back(0);
+    if (n == 1)
+        s.push_back(1);
+    if (n > 1) {
+        s.push_back(0);
+        s.push_back(1);
+        n -= 2;
+        for (size_t i = 1; n > 1; i++) {
+            if (i < len) {
+                s.push_back(s[i] + (2 * s[i - 1]));
+            }
+            n--;
+        }
+        s.push_back(len); // size of input will be the last element in the sequence
+    }
+    printLog(s, "jacob:");
+
+    return (s);
 }
 
 static void    fillNumbersInSeq(std::vector<std::pair<int, int> > &dst, const std::vector<int> &src)
@@ -77,4 +134,18 @@ static void    checkDuplicate(const std::vector<int> &lst, const int &odd, const
                 }
             }
     }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Overloads                                  */
+/* -------------------------------------------------------------------------- */
+
+std::ostream&   operator<<(std::ostream &os, const PmergeMe &s)
+{
+    for (size_t i = 0; i < s.seq.size(); i++) {
+        os << " " << s.seq[i].first << " " << s.seq[i].second;
+    }
+    if (s.isOdd)
+        os << " | odd = " << s.oddNum;
+    return (os);
 }
