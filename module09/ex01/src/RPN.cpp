@@ -67,9 +67,9 @@ double    RPNcalculator(const char *p)
         throw std::runtime_error("Error: in token : " + token);
     }
 
+    if (rpn.size() != 1)
+        throw std::runtime_error("Error: invalid argument");
     double res = rpn.top();
     rpn.pop();
-    if (rpn.size() != 0)
-        throw std::runtime_error("Error: invalid argument");
     return (res);
 }
