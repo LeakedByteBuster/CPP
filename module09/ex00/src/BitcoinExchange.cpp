@@ -96,22 +96,15 @@ void    BitcoinExchange::readInputFile()
             std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
             continue ;
         }
-        
         std::string value = line.substr(pos +1, line.size());
         if (!isValueCorrect(value)) {
             continue ;
         }
-
         DataBase::iterator  it = db.lower_bound(date);
-        if (it != db.begin()) {
-            it--;
-        }
+        if (it != db.begin()) { it--; }
         std::cout   << std::fixed << std::setprecision(2) << date << " ==> " << value << " = " 
                     << it->second * std::strtod(value.data(), NULL) 
                     << std::endl;
-
-        std::cout << "lower : " << it->first << std::endl;
-        // 
     }
     return ;
 }

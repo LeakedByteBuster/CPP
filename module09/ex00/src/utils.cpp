@@ -41,13 +41,12 @@ static bool checkRange(std::string str, int type)
     return (ret);
 }
 
-bool    isLeapYear(int year)
-{ 
 // The year must be evenly divisible by 4;
 // If the year can also be evenly divided by 100, it is not a leap year;
 // unless...
 // The year is also evenly divisible by 400. Then it is a leap year.
-
+bool    isLeapYear(int year)
+{
     int ret = ((year % 4) == 0) ? 1 : 0;
     if (ret && (year % 100) == 0) {
         ret = ((year % 400) == 0) ? 1 : 0;
@@ -99,6 +98,9 @@ bool    isDateCorrect(std::string &sub)
         return (0);
     }
 
+    if (sub.compare("2009-01-02") < 0) {
+        return(0);
+    }
     return (checkDateExistence(year, month, day));
 }
 
