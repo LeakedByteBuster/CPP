@@ -1,4 +1,3 @@
-#include <sys/time.h>
 #include <ctime>
 #include <iomanip>
 #include "PmergeMe.hpp"
@@ -28,8 +27,7 @@ int main(int ac, const char **av)
             throw std::invalid_argument("Error: not enough parameters");
 //      check if there is an odd number of elements, duplicate, negative numbers, and pair elements
         clock_t start = clock();
-        
-        PmergeMe    sorter(av);
+        PmergeMe< std::vector< std::pair< int, int > >, std::vector< int >, std::vector< int > >    sorter(av);
         printLog(sorter, "[ Before ]");
 
         sorter.swapElementInSeq();
@@ -40,6 +38,18 @@ int main(int ac, const char **av)
         printLog(sorter.mainChain, "[ After ]");
 
         printTime(sorter.mainChain.size(), execTime, "std::vector<int>");
+
+
+        clock_t startDeque = clock();
+        
+        PmergeMe< std::deque< std::pair< int, int > >, std::deque< int >, std::deque< int > >    sortDeque(av);
+        sortDeque.swapElementInSeq();
+        std::sort(sortDeque.seq.begin(), sortDeque.seq.end());
+        sortDeque.fillMainAndPendChain();
+        sortDeque.insertPendIntoMain();        
+        double execTimeDeque = (double)(clock() - startDeque) / CLOCKS_PER_SEC;
+
+        printTime(sortDeque.mainChain.size(), execTimeDeque, "std::deque<int>");
 
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;

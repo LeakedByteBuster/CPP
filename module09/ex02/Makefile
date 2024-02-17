@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 STD = -std=c++98
 
-INCLUDE = -Iinclude
+INCLUDE = -I./include
 
 SRC = $(shell find . -type f -name "*.cpp")
 
