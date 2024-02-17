@@ -1,7 +1,6 @@
 #include <iostream>
 #include "RPN.hpp"
 
-// ./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
 int main(int ac, char **av)
 {
     try {

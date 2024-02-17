@@ -30,7 +30,7 @@ BitcoinExchange::BitcoinExchange(const char *in)
         if (!line.empty()) {
             for (int i = 0; std::getline(ss, token, ','); i++) {
                 if (i == 1) {
-                    db.insert(std::make_pair(prev, std::strtod(token.data(), NULL)));
+                    db[prev] = std::strtod(token.data(), NULL);
                 }
                 prev = token;
             }
