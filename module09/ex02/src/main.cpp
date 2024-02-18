@@ -34,9 +34,8 @@ int main(int ac, const char **av)
         sortDeque.swapElementInSeq();
         std::sort(sortDeque.seq.begin(), sortDeque.seq.end());
         sortDeque.fillMainAndPendChain();
-        sortDeque.insertPendIntoMain();        
+        sortDeque.insertPendIntoMain();      
         double execTimeDeque = (double)(clock() - startDeque) / CLOCKS_PER_SEC;
-
         printTime(sortDeque.mainChain.size(), execTimeDeque, "std::deque<int>");
 
     } catch (std::exception &e) {

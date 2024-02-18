@@ -52,29 +52,6 @@ void    fillNumbersInSeq(srcType &dst, const dstType &src)
     }
 }
 
-template<typename sequenceType>
-void    checkDuplicate(const sequenceType &lst, const int &odd, const bool &isOdd)
-{
-    int check = 0;
-    for (size_t i = 0; i < lst.size(); i++) {
-        check = lst[i];
-        for (size_t j = 0; j < lst.size(); j++) {
-            if (i != j) {
-                if (check == lst[j]) {
-                    throw std::invalid_argument("Error: duplicate number");
-                }
-            }
-        }
-    }
-    if (isOdd) {
-        for (size_t j = 0; j < lst.size(); j++) {
-                if (odd == lst[j]) {
-                    throw std::invalid_argument("Error: duplicate number");
-                }
-            }
-    }
-}
-
 /* -------------------------------------------------------------------------- */
 /*                                Constructors                                */
 /* -------------------------------------------------------------------------- */
@@ -93,7 +70,6 @@ PmergeMe<seqType, mainChainType, pendChainType>::PmergeMe(const char **av) : isO
         oddNum = lst.back();
         lst.erase(--(lst.end()));
     }
-    checkDuplicate(lst, oddNum, isOdd);
     // fill the std::vector<pair...> Seq in the class using lst vector
     fillNumbersInSeq(this->seq, lst);
 }

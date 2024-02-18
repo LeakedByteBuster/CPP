@@ -117,7 +117,7 @@ bool    isValueCorrect(std::string &sub)
         std::cout << BitcoinExchange::getError("", NOT_A_POSITIVE) << std::endl;
         return (0);
     }
-    if (d > 100) {
+    if (d > 1000) {
         std::cout << BitcoinExchange::getError("", TOO_LARGE_NUMBER) << std::endl;
         return (0);
     }
