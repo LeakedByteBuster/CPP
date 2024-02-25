@@ -25,7 +25,10 @@ public:
     bool                                isOdd;
     int                                 oddNum;
 
+    PmergeMe();
     PmergeMe(const char **av);
+    PmergeMe(const PmergeMe &rhs);
+    PmergeMe    &operator=(const PmergeMe &rhs);
     ~PmergeMe();
 
     int     strToInt(const char *av); // throws except
@@ -72,6 +75,30 @@ PmergeMe<seqType, mainChainType, pendChainType>::PmergeMe(const char **av) : isO
     }
     // fill the std::vector<pair...> Seq in the class using lst vector
     fillNumbersInSeq(this->seq, lst);
+}
+
+template<typename seqType, typename mainChainType, typename pendChainType>
+PmergeMe<seqType, mainChainType, pendChainType>::PmergeMe() : isOdd(0), oddNum(0)
+{
+}
+
+template<typename seqType, typename mainChainType, typename pendChainType>
+PmergeMe<seqType, mainChainType, pendChainType>::PmergeMe(const PmergeMe &rhs)
+{
+    *this = rhs;
+}
+
+template<typename seqType, typename mainChainType, typename pendChainType>
+PmergeMe<seqType, mainChainType, pendChainType>    &PmergeMe<seqType, mainChainType, pendChainType>::operator=(const PmergeMe &rhs)
+{
+    if (this != &rhs) {
+        isOdd = rhs.isOdd;
+        oddNum = rhs.oddNum;
+        seq = rhs.seq;
+        mainChain = rhs.mainChain;
+        pendChain = rhs.pendChain;
+    }
+    return (*this);
 }
 
 template<typename seqType, typename mainChainType, typename pendChainType>
