@@ -102,6 +102,10 @@ void    BitcoinExchange::readInputFile()
         }
         DataBase::iterator  it = db.lower_bound(date);
         if (it != db.begin()) { it--; }
+        // if (it->first.compare(date) > 0) {
+        //     std::cout << BitcoinExchange::getError(line, BAD_INPUT) << std::endl;
+        //     continue ;
+        // }
         std::cout   << std::fixed << std::setprecision(2) << date << " ==> " << value << " = " 
                     << it->second * std::strtod(value.data(), NULL) 
                     << std::endl;

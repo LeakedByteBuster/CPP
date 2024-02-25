@@ -1,3 +1,4 @@
+#include <errno.h>
 #include "BitcoinExchange.hpp"
 
 enum    tokens {
@@ -18,13 +19,17 @@ static bool isStringDigit(std::string str, size_t size)
 
 static bool checkRange(std::string str, int type)
 {
-    double d = std::strtod(str.data(), NULL);
+    char    *endptr = NULL;
+    errno = 0;
+    long d = std::strtol(str.data(), &endptr, 10);
+    if (errno == ERANGE) {
+        return (0);
+    }
     int ret = 0;
-
     switch (type)
     {
     case YEAR:
-        ret = (((d > 2008) && (d < 2023)) ? 1 : 0);
+        ret = ((d > 2008) ? 1 : 0);
         break;
 
     case MONTH:
@@ -63,10 +68,23 @@ bool    checkDateExistence(const std::string &year, const std::string &month,
     int d = std::atoi(day.data());
 
     if ((m == 2) && d > 28) {
-        if (!isLeapYear(y) || d > 29) { return (0); }
+        if (!isLeapYear(y) || d > 29) {
+            return (0);
+        }
     }
-    if ((m % 2) == 0) {
-        if (m != 8 && d > 30) { return (0); }
+    // from 01 --> 08
+    if (((m % 2) == 0) && m <= 8) {
+        if (m != 8 && d > 30) {
+            return (0);
+        } 
+    } 
+    // from 09 --> 12
+    if (((m % 2) != 0) && d > 30 && m > 8) {
+            return (0);
+    }
+    if (year.compare("2009") == 0) {
+        if (m == 1 && d < 2)
+            return(0);
     }
     return (1);
 }
@@ -83,7 +101,6 @@ bool    isDateCorrect(std::string &sub)
 
     /* parse month */
     size_t  pos2 = sub.find('-', pos +1);
-    // pos2 - 1 = removeSpaceAtEnd - pos = length of str between the two '-'
     std::string month = sub.substr(pos + 1, (pos2 - pos - 1));
     if (!isStringDigit(month, 2) || (pos == std::string::npos)
             || !checkRange(month, MONTH)) {
@@ -96,10 +113,6 @@ bool    isDateCorrect(std::string &sub)
     if (!isStringDigit(day, 2) || (pos == std::string::npos)
             || !checkRange(day, DAY)) {
         return (0);
-    }
-
-    if (sub.compare("2009-01-02") < 0) {
-        return(0);
     }
     return (checkDateExistence(year, month, day));
 }

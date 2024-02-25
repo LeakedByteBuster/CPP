@@ -10,7 +10,9 @@
 #include <cstdlib>
 #include "utils.hpp"
 
-#define DATA_FILE "/Users/mfouadi/Desktop/42Cursus/CPP/module09/ex00/cpp_09/data.csv"
+#if !defined(DATA_FILE)
+#define DATA_FILE "./cpp_09/data.csv"
+#endif  // DATA_FILE
 
 typedef std::map<std::string, double> DataBase;
 
