@@ -47,6 +47,13 @@ Serena
 Diamond
 zoo
 Interface
+Bureaucrat
+converter
+serializer
+identify
+btc
+RPN
+PmergeMe
 
 # Test Files
 foo.*
@@ -55,3 +62,4 @@ test.*
 # Others
 .vscode
 Lab
+.editorconfig

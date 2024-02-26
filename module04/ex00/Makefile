@@ -46,9 +46,6 @@ else ifeq ($(BUILD), buildWrong)
 else ifeq ($(BUILD), wrongLeaks)
 	CXXFLAGS+=-DTEST_LEAKS -DTESTS -DWRONG_CLASSES
 #----------------------------------
-else ifeq ($(BUILD), sanitize)
-	CXXFLAGS+=-fsanitize=address
-#----------------------------------
 else ifeq ($(BUILD), nothing)
 	CXXFLAGS+=-DSTOP_SIMULATION
 endif
